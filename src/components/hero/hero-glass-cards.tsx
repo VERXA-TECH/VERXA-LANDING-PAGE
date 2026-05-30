@@ -1,5 +1,5 @@
-import { ConvertPreviewCard } from '@/components/hero/glass/convert-preview-card'
-import { MoneyReceivedCard } from '@/components/hero/glass/money-received-card'
+import { ConvertPreviewCard } from "@/components/hero/glass/convert-preview-card"
+import { MoneyReceivedCard } from "@/components/hero/glass/money-received-card"
 
 const PHONE_DESKTOP_INTRINSIC = { width: 375, height: 417 } as const
 const PHONE_MOBILE_INTRINSIC = { width: 258, height: 290 } as const
@@ -19,6 +19,9 @@ export const HERO_PHONE = {
   widthMobile: 257.869,
   heightDesktop: visibleHeightForWidth(374.202, PHONE_DESKTOP_INTRINSIC),
   heightMobile: visibleHeightForWidth(257.869, PHONE_MOBILE_INTRINSIC),
+  bottomDesktop:
+    565 + visibleHeightForWidth(374.202, PHONE_DESKTOP_INTRINSIC),
+  bottomMobile: 522 + visibleHeightForWidth(257.869, PHONE_MOBILE_INTRINSIC),
   desktopIntrinsic: PHONE_DESKTOP_INTRINSIC,
   mobileIntrinsic: PHONE_MOBILE_INTRINSIC,
   /** Horizontal gap between phone left edge and money card. */
@@ -27,13 +30,17 @@ export const HERO_PHONE = {
   moneyCardTopAbovePhone: 46.24,
   convertCardGapRight: 55.16,
   convertCardOffsetFromPhoneBottom: 55,
+  portfolioCardTopDesktop: 120.79,
+  portfolioCardRightDesktop: 29.77,
+  portfolioCardTopMobile: 83.24,
+  portfolioCardRightMobile: 20.52,
 } as const
 
 type HeroGlassCardsProps = {
   className?: string
 }
 
-export function HeroGlassCards({ className = '' }: HeroGlassCardsProps) {
+export function HeroGlassCards({ className = "" }: HeroGlassCardsProps) {
   return (
     <div
       className={`pointer-events-none absolute inset-0 hidden lg:block ${className}`}
@@ -44,8 +51,8 @@ export function HeroGlassCards({ className = '' }: HeroGlassCardsProps) {
         style={{
           top: -HERO_PHONE.moneyCardTopAbovePhone,
           left: -HERO_PHONE.moneyCardGapLeft,
-          transform: 'translate(-100%, 0) rotate(-22.129deg)',
-          transformOrigin: '100% 0%',
+          transform: "translate(-100%, 0) rotate(-22.129deg)",
+          transformOrigin: "100% 0%",
         }}
       >
         <MoneyReceivedCard />

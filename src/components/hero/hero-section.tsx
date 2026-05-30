@@ -1,5 +1,7 @@
 import Image from 'next/image'
+import { HeroContent } from '@/components/hero/hero-content'
 import { HeroGlassCards, HERO_PHONE } from '@/components/hero/hero-glass-cards'
+import { TotalPortfolioValueCard } from '@/components/hero/glass/total-portfolio-value-card'
 import { HeroTopNav } from '@/components/hero/hero-top-nav'
 
 const HERO_BG_DESKTOP = '/images/Hero.png'
@@ -14,7 +16,7 @@ export function HeroSection() {
   const desktop = HERO_PHONE.desktopIntrinsic
 
   return (
-    <section className="relative w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden min-h-[812px] lg:min-h-[981px]">
       <div
         className="pointer-events-none absolute inset-0 bg-[lightgray] bg-cover bg-[50%] bg-no-repeat lg:hidden"
         style={{ backgroundImage: `url('${HERO_BG_MOBILE}')` }}
@@ -28,7 +30,7 @@ export function HeroSection() {
 
       {/* Mobile phone — 522px from viewport top; no glass cards */}
       <div
-        className="pointer-events-none absolute left-1/2 z-[1] -translate-x-1/2 lg:hidden"
+        className="pointer-events-none absolute left-1/2 z-[2] -translate-x-1/2 lg:hidden"
         style={{
           top: HERO_PHONE.topMobile,
           width: HERO_PHONE.widthMobile,
@@ -44,11 +46,20 @@ export function HeroSection() {
           priority
           className="size-full object-contain object-top"
         />
+        <div
+          className="absolute z-[2]"
+          style={{
+            top: HERO_PHONE.portfolioCardTopMobile,
+            right: HERO_PHONE.portfolioCardRightMobile,
+          }}
+        >
+          <TotalPortfolioValueCard />
+        </div>
       </div>
 
       {/* Desktop phone + glass cards */}
       <div
-        className="pointer-events-none absolute left-1/2 z-[1] hidden -translate-x-1/2 lg:block"
+        className="pointer-events-none absolute left-1/2 z-[2] hidden -translate-x-1/2 lg:block"
         style={{
           top: HERO_PHONE.topDesktop,
           width: HERO_PHONE.width,
@@ -64,11 +75,21 @@ export function HeroSection() {
           priority
           className="relative z-[1] size-full object-contain object-top"
         />
+        <div
+          className="absolute z-[2]"
+          style={{
+            top: HERO_PHONE.portfolioCardTopDesktop,
+            right: HERO_PHONE.portfolioCardRightDesktop,
+          }}
+        >
+          <TotalPortfolioValueCard />
+        </div>
         <HeroGlassCards className="z-[2]" />
       </div>
 
-      <div className="relative z-10 min-h-[850px] lg:min-h-[1000px]">
+      <div className="relative z-10">
         <HeroTopNav />
+        <HeroContent />
       </div>
     </section>
   )
