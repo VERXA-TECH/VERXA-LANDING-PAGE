@@ -19,8 +19,7 @@ export const HERO_PHONE = {
   widthMobile: 257.869,
   heightDesktop: visibleHeightForWidth(374.202, PHONE_DESKTOP_INTRINSIC),
   heightMobile: visibleHeightForWidth(257.869, PHONE_MOBILE_INTRINSIC),
-  bottomDesktop:
-    565 + visibleHeightForWidth(374.202, PHONE_DESKTOP_INTRINSIC),
+  bottomDesktop: 565 + visibleHeightForWidth(374.202, PHONE_DESKTOP_INTRINSIC),
   bottomMobile: 522 + visibleHeightForWidth(257.869, PHONE_MOBILE_INTRINSIC),
   desktopIntrinsic: PHONE_DESKTOP_INTRINSIC,
   mobileIntrinsic: PHONE_MOBILE_INTRINSIC,

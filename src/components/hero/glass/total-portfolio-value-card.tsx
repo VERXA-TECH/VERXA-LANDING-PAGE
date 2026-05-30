@@ -1,6 +1,6 @@
-import { HeroIcon } from '@/components/hero/hero-icon'
+import { HeroIcon } from "@/components/hero/hero-icon"
 
-const WHITE_ICON = 'brightness-0 invert'
+const WHITE_ICON = "brightness-0 invert"
 
 function NgnDropdown() {
   return (
@@ -25,10 +25,10 @@ function NgnDropdown() {
 }
 
 const CHART_STROKE =
-  'M0 27.0301C4.26463 27.0301 8.28407 25.0366 10.8648 21.6414L20.456 9.02334C24.4763 3.73425 30.738 0.628601 37.3816 0.628601C42.5122 0.628601 47.4698 2.48397 51.3397 5.85245L54.5329 8.63181C58.4971 12.0823 63.5754 13.9829 68.8309 13.9829C72.8059 13.9829 76.7051 15.0708 80.1059 17.1287L85.9361 20.6569C89.0532 22.5431 92.627 23.5403 96.2704 23.5403C99.8713 23.5403 103.405 22.5662 106.497 20.7212L109.782 18.7616C115.024 15.6341 121.014 13.9829 127.118 13.9829C129.046 13.9829 131.015 13.9829 132.883 13.9829C139.528 13.9829 145.952 11.6156 151.009 7.30573C156.066 2.99584 162.492 0.628601 169.137 0.628601H169.393C175.301 0.628601 181.065 2.45542 185.894 5.85874L192.079 10.2178C195.555 12.6678 199.704 13.9829 203.957 13.9829C206.768 13.9829 209.549 13.4082 212.129 12.2942L225.68 6.44454C234.568 2.60777 244.147 0.628601 253.827 0.628601'
+  "M0 27.0301C4.26463 27.0301 8.28407 25.0366 10.8648 21.6414L20.456 9.02334C24.4763 3.73425 30.738 0.628601 37.3816 0.628601C42.5122 0.628601 47.4698 2.48397 51.3397 5.85245L54.5329 8.63181C58.4971 12.0823 63.5754 13.9829 68.8309 13.9829C72.8059 13.9829 76.7051 15.0708 80.1059 17.1287L85.9361 20.6569C89.0532 22.5431 92.627 23.5403 96.2704 23.5403C99.8713 23.5403 103.405 22.5662 106.497 20.7212L109.782 18.7616C115.024 15.6341 121.014 13.9829 127.118 13.9829C129.046 13.9829 131.015 13.9829 132.883 13.9829C139.528 13.9829 145.952 11.6156 151.009 7.30573C156.066 2.99584 162.492 0.628601 169.137 0.628601H169.393C175.301 0.628601 181.065 2.45542 185.894 5.85874L192.079 10.2178C195.555 12.6678 199.704 13.9829 203.957 13.9829C206.768 13.9829 209.549 13.4082 212.129 12.2942L225.68 6.44454C234.568 2.60777 244.147 0.628601 253.827 0.628601"
 
 const CHART_FILL =
-  'M6.76873 26.7522H0V27.0301H253.827V0.628601H239.153L208.218 13.8423H197.421L178.472 0.628601H158.843L143.175 13.8423H117.792L101.772 23.2991H90.701L74.9073 13.8423H60.6806L45.3382 0.628601H26.837L6.76873 26.7522Z'
+  "M6.76873 26.7522H0V27.0301H253.827V0.628601H239.153L208.218 13.8423H197.421L178.472 0.628601H158.843L143.175 13.8423H117.792L101.772 23.2991H90.701L74.9073 13.8423H60.6806L45.3382 0.628601H26.837L6.76873 26.7522Z"
 
 const DESKTOP_CHART_SCALE_X = 368.337 / 253.827
 const DESKTOP_CHART_SCALE_Y = 38.312 / 27.0301
@@ -108,7 +108,9 @@ function PortfolioSparkline() {
         <defs>
           <ChartFillGradientBoundingBox id="portfolioChartFillDesktop" />
         </defs>
-        <g transform={`scale(${DESKTOP_CHART_SCALE_X} ${DESKTOP_CHART_SCALE_Y})`}>
+        <g
+          transform={`scale(${DESKTOP_CHART_SCALE_X} ${DESKTOP_CHART_SCALE_Y})`}
+        >
           <path d={CHART_FILL} fill="url(#portfolioChartFillDesktop)" />
           <path
             d={CHART_STROKE}
@@ -164,7 +166,7 @@ function PortfolioFooter() {
 }
 
 const CARD_BORDER_GRADIENT =
-  'linear-gradient(135deg, #5F6F00 0%, #F9FFC8 33%, #02785C 66%, #00000033 100%)'
+  "linear-gradient(135deg, #5F6F00 0%, #F9FFC8 33%, #02785C 66%, #00000033 100%)"
 
 export function TotalPortfolioValueCard() {
   return (
@@ -173,28 +175,28 @@ export function TotalPortfolioValueCard() {
       style={{ background: CARD_BORDER_GRADIENT }}
     >
       <div className="flex flex-col items-stretch justify-center gap-[6.286px] rounded-[13.83px] bg-[#45682F] p-[12.572px] lg:gap-[9.122px] lg:rounded-[20.069px] lg:p-[18.244px]">
-      <div className="flex w-full items-center justify-between gap-2">
-        <span className="font-[family-name:var(--font-inter)] text-[7.543px] font-medium uppercase leading-[10.058px] tracking-[0.302px] text-white [font-feature-settings:'liga'_off,'calt'_off] lg:text-[10.946px] lg:leading-[14.595px] lg:tracking-[0.438px]">
-          TOTAL PORTFOLIO VALUE
-        </span>
-        <NgnDropdown />
-      </div>
+        <div className="flex w-full items-center justify-between gap-2">
+          <span className="font-[family-name:var(--font-inter)] text-[7.543px] font-medium uppercase leading-[10.058px] tracking-[0.302px] text-white [font-feature-settings:'liga'_off,'calt'_off] lg:text-[10.946px] lg:leading-[14.595px] lg:tracking-[0.438px]">
+            TOTAL PORTFOLIO VALUE
+          </span>
+          <NgnDropdown />
+        </div>
 
-      <div className="flex items-center gap-[6.286px] lg:gap-[9.122px]">
-        <p className="font-[family-name:var(--font-heuvel)] text-[30.173px] font-medium leading-[35.202px] tracking-[-0.302px] text-white [font-feature-settings:'liga'_off,'calt'_off] lg:text-[43.785px] lg:font-normal lg:leading-[51.083px] lg:tracking-[-0.438px]">
-          ₦120,000.00
-        </p>
-        <HeroIcon
-          src="/icons/hero/eye-line.svg"
-          width={22}
-          height={22}
-          className={`size-[7.875px] shrink-0 lg:size-[21.893px] ${WHITE_ICON}`}
-        />
-      </div>
+        <div className="flex items-center gap-[6.286px] lg:gap-[9.122px]">
+          <p className="font-[family-name:var(--font-heuvel)] text-[30.173px] font-medium leading-[35.202px] tracking-[-0.302px] text-white [font-feature-settings:'liga'_off,'calt'_off] lg:text-[43.785px] lg:font-normal lg:leading-[51.083px] lg:tracking-[-0.438px]">
+            ₦120,000.00
+          </p>
+          <HeroIcon
+            src="/icons/hero/eye-line.svg"
+            width={22}
+            height={22}
+            className={`size-[7.875px] shrink-0 lg:size-[21.893px] ${WHITE_ICON}`}
+          />
+        </div>
 
-      <PortfolioSparkline />
+        <PortfolioSparkline />
 
-      <PortfolioFooter />
+        <PortfolioFooter />
       </div>
     </div>
   )
