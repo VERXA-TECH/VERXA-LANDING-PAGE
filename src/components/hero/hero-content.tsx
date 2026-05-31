@@ -1,20 +1,17 @@
-import Image from 'next/image'
+import { ASSETS } from '@/lib/assets'
 import { PageContainer } from '@/components/layout/page-container'
 import { HeroIcon } from '@/components/hero/hero-icon'
+import { SafeImage } from '@/components/ui/safe-image'
+import { WaitlistForm } from '@/components/waitlist/waitlist-form'
 
-const WAITLIST_AVATARS = [
-  { src: '/images/hero/avatars/avatar-1.png', bg: '#EBEBEB' },
-  { src: '/images/hero/avatars/avatar-2.png', bg: '#C0D5FF' },
-  { src: '/images/hero/avatars/avatar-3.png', bg: '#FFECC0' },
-  { src: '/images/hero/avatars/avatar-4.png', bg: '#C0EAFF' },
-] as const
+const WAITLIST_AVATAR_BACKGROUNDS = ['#EBEBEB', '#C0D5FF', '#FFECC0', '#C0EAFF'] as const
 
 function WaitlistBadge() {
   return (
     <div className="inline-flex items-center">
       <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-l-[7.817px] bg-[var(--color-primary-base)] px-[5.568px] pt-[6px] pb-[5.227px] pr-[5.659px]">
         <HeroIcon
-          src="/icons/hero/flashlight-fill.svg"
+          src={ASSETS.icons.hero.flashlight}
           width={17}
           height={17}
           className="size-3.5 shrink-0 lg:size-[17px]"
@@ -32,17 +29,21 @@ function WaitlistBadge() {
 function WaitlistAvatars() {
   return (
     <div className="flex items-center pr-1">
-      {WAITLIST_AVATARS.map(({ src, bg }, index) => (
+      {ASSETS.hero.avatars.map((src, index) => (
         <div
           key={src}
           className="relative flex size-[27px] shrink-0 items-center justify-center overflow-hidden rounded-full border-[0.75px] border-[#171717] lg:size-[30px]"
-          style={{ marginLeft: index === 0 ? 0 : -8, backgroundColor: bg }}
+          style={{
+            marginLeft: index === 0 ? 0 : -8,
+            backgroundColor: WAITLIST_AVATAR_BACKGROUNDS[index],
+          }}
         >
-          <Image
+          <SafeImage
             src={src}
             alt=""
             width={30}
             height={30}
+            sizes="30px"
             className="size-full object-cover"
           />
         </div>
@@ -67,29 +68,9 @@ export function HeroContent() {
         one fast, secure platform built for Nigeria.
       </p>
 
-      <form
-        className="flex h-14 w-full items-center gap-2 self-stretch rounded-[10px] border border-[var(--color-holly-600)] bg-[var(--color-input-bg)] py-2.5 pr-3 pl-0 shadow-[0_1px_2px_0_rgba(10,13,20,0.03)]"
-        action="#waitlist"
-      >
-        <label htmlFor="hero-waitlist-email" className="sr-only">
-          Email address
-        </label>
-        <input
-          id="hero-waitlist-email"
-          type="email"
-          name="email"
-          required
-          autoComplete="email"
-          placeholder="Your email address"
-          className="min-w-0 flex-1 bg-transparent px-3 font-[family-name:var(--font-heuvel)] text-sm font-normal leading-5 tracking-[-0.084px] text-white placeholder:text-[var(--color-text-soft-400)] outline-none [font-feature-settings:'liga'_off,'calt'_off]"
-        />
-        <button
-          type="submit"
-          className="inline-flex h-[42px] shrink-0 items-center justify-center gap-2 rounded-[24px] border border-[#94BC27] bg-[#2C3308] px-5 py-3 font-[family-name:var(--font-heuvel)] text-sm font-normal leading-6 text-[#E5E8E7] lg:text-base"
-        >
-          Join waitlist
-        </button>
-      </form>
+      <div id="waitlist" className="w-full scroll-mt-28">
+        <WaitlistForm source="hero" variant="hero" />
+      </div>
 
       <div className="flex items-center gap-3">
         <WaitlistAvatars />

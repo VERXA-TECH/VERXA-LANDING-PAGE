@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run validate:assets && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "validate:assets": "node scripts/validate-assets.mjs",
+    "compress:hero": "node scripts/compress-hero-images.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.106.2",
     "next": "^15.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

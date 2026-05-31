@@ -1,4 +1,5 @@
-const CTA_BG_MARK = '/images/cta-bg-mark.png'
+import { ASSETS } from '@/lib/assets'
+import { SafeImage } from '@/components/ui/safe-image'
 
 export function CtaSection() {
   return (
@@ -10,10 +11,15 @@ export function CtaSection() {
         className="pointer-events-none absolute inset-0 flex items-center justify-center lg:hidden"
         aria-hidden
       >
-        <div
-          className="size-[374px] shrink-0 bg-[var(--color-primary-base)] bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('${CTA_BG_MARK}')` }}
-        />
+        <div className="relative size-[374px] shrink-0">
+          <SafeImage
+            src={ASSETS.cta.bgMark}
+            alt=""
+            fill
+            sizes="374px"
+            className="object-cover object-center"
+          />
+        </div>
       </div>
 
       <div className="relative z-10 flex w-full max-w-[1512px] flex-col items-center justify-center gap-8">
