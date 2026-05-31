@@ -2,10 +2,10 @@
 export const ASSETS = {
   logo: "/images/verxa_logo.png",
   hero: {
-    bgDesktop: "/images/hero-bg-desktop.png",
-    bgMobile: "/images/hero-bg-mobile.png",
-    phoneDesktop: "/images/phone-mockup-desktop.png",
-    phoneMobile: "/images/phone-mockup-mobile.png",
+    bgDesktop: "/images/hero-bg-desktop.webp",
+    bgMobile: "/images/hero-bg-mobile.webp",
+    phoneDesktop: "/images/phone-mockup-desktop.webp",
+    phoneMobile: "/images/phone-mockup-mobile.webp",
     avatars: [
       "/images/hero/avatars/avatar-1.png",
       "/images/hero/avatars/avatar-2.png",

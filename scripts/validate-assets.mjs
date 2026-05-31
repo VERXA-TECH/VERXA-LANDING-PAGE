@@ -10,7 +10,7 @@ const assetsSource = fs.readFileSync(
 
 const paths = [
   ...new Set(
-    [...assetsSource.matchAll(/'(\/(?:images|icons)\/[^']+)'/g)].map((match) => match[1]),
+    [...assetsSource.matchAll(/["'](\/(?:images|icons)\/[^"']+)["']/g)].map((match) => match[1]),
   ),
 ]
 
