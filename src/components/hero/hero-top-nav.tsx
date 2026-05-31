@@ -1,12 +1,13 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import { ASSETS } from '@/lib/assets'
 import { PageContainer } from '@/components/layout/page-container'
+import { SafeImage } from '@/components/ui/safe-image'
+import Link from 'next/link'
 
 function VerxaLogo() {
   return (
     <Link href="/" className="flex h-[38px] w-[77px] shrink-0 items-center gap-[2.974px]">
-      <Image
-        src="/images/verxa_logo.png"
+      <SafeImage
+        src={ASSETS.logo}
         alt="Verxa"
         width={77}
         height={38}

@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { HeroIcon } from '@/components/hero/hero-icon'
+import { ASSETS } from '@/lib/assets'
 import { GlassCard } from '@/components/ui/glass-card'
 
 /** Figma hero scale (~94.4% of onboarding convert card). */
@@ -54,9 +54,8 @@ function CurrencyPill({
         gap: pill.gap,
       }}
     >
-      <Image
+      <HeroIcon
         src={iconSrc}
-        alt=""
         width={pill.iconSize}
         height={pill.iconSize}
       />
@@ -64,7 +63,7 @@ function CurrencyPill({
         {code}
       </span>
       <HeroIcon
-        src="/icons/hero/arrow-down-s-line.svg"
+        src={ASSETS.icons.hero.arrowDown}
         width={pill.chevronSize}
         height={pill.chevronSize}
       />
@@ -157,7 +156,7 @@ export function ConvertPreviewCard() {
             label="Convert"
             balanceText="Balance: 20.1 USDT"
             amount="5.12 USDT"
-            iconSrc="/icons/hero/Tether USDT.svg"
+            iconSrc={ASSETS.icons.hero.tether}
             currencyCode="USDT"
           />
           <ConvertRow
@@ -165,7 +164,7 @@ export function ConvertPreviewCard() {
             label="To"
             balanceText="Balance: ₦847,500"
             amount="₦200,000"
-            iconSrc="/icons/flags/Nigeria.svg"
+            iconSrc={ASSETS.icons.flags.nigeria}
             currencyCode="NGN"
           />
 
@@ -180,7 +179,7 @@ export function ConvertPreviewCard() {
             }}
           >
             <HeroIcon
-              src="/icons/hero/arrow-up-down-line.svg"
+              src={ASSETS.icons.hero.arrowUpDown}
               width={swap.iconSize}
               height={swap.iconSize}
             />
@@ -190,7 +189,7 @@ export function ConvertPreviewCard() {
 
       <div className="flex items-center gap-1">
         <HeroIcon
-          src="/icons/hero/information-fill.svg"
+          src={ASSETS.icons.hero.information}
           width={card.infoIconSize}
           height={card.infoIconSize}
         />

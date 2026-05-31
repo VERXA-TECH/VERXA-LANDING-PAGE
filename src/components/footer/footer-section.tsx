@@ -1,11 +1,12 @@
-import Image from 'next/image'
+import { ASSETS } from '@/lib/assets'
 import { PageContainer } from '@/components/layout/page-container'
+import { SafeImage } from '@/components/ui/safe-image'
 
 const SOCIAL_LINKS = [
-  { href: 'https://x.com/verxa', label: 'X (Twitter)', icon: '/icons/footer/x.png' },
-  { href: 'https://instagram.com/verxa', label: 'Instagram', icon: '/icons/footer/instagram.png' },
-  { href: 'https://linkedin.com/company/verxa', label: 'LinkedIn', icon: '/icons/footer/linkedin.png' },
-  { href: 'https://t.me/verxa', label: 'Telegram', icon: '/icons/footer/telegram.png' },
+  { href: 'https://x.com/verxa', label: 'X (Twitter)', icon: ASSETS.footer.x },
+  { href: 'https://instagram.com/verxa', label: 'Instagram', icon: ASSETS.footer.instagram },
+  { href: 'https://linkedin.com/company/verxa', label: 'LinkedIn', icon: ASSETS.footer.linkedin },
+  { href: 'https://t.me/verxa', label: 'Telegram', icon: ASSETS.footer.telegram },
 ] as const
 
 export function FooterSection() {
@@ -25,7 +26,7 @@ export function FooterSection() {
                 aria-label={label}
                 className="transition-opacity hover:opacity-80"
               >
-                <Image src={icon} alt="" width={20} height={20} className="size-5" />
+                <SafeImage src={icon} alt="" width={20} height={20} className="size-5" />
               </a>
             ))}
           </div>

@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { HeroIcon } from '@/components/hero/hero-icon'
+import { ASSETS } from '@/lib/assets'
 import { GlassCard } from '@/components/ui/glass-card'
 
 /** Figma hero scale (~94.4% of onboarding slide 1 card). */
@@ -32,7 +32,7 @@ export function MoneyReceivedCard() {
           }}
         >
           <HeroIcon
-            src="/icons/hero/send-plane-fill.svg"
+            src={ASSETS.icons.hero.sendPlane}
             width={iconSize}
             height={iconSize}
           />
@@ -61,9 +61,8 @@ export function MoneyReceivedCard() {
         className="relative shrink-0 overflow-hidden rounded-full"
         style={{ width: flagSize, height: flagSize }}
       >
-        <Image
-          src="/icons/flags/United Kingdom.svg"
-          alt=""
+        <HeroIcon
+          src={ASSETS.icons.flags.uk}
           width={flagSize}
           height={flagSize}
           className="size-full object-cover"

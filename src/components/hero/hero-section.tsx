@@ -1,15 +1,10 @@
-import Image from 'next/image'
+import { ASSETS } from '@/lib/assets'
 import { HeroContent } from '@/components/hero/hero-content'
 import { HeroGlassCards, HERO_PHONE } from '@/components/hero/hero-glass-cards'
 import { TotalPortfolioValueCard } from '@/components/hero/glass/total-portfolio-value-card'
 import { HeroTopNav } from '@/components/hero/hero-top-nav'
-
-const HERO_BG_DESKTOP = '/images/Hero.png'
-const HERO_BG_MOBILE = '/images/Hero Section mobile.png'
-const PHONE_MOCKUP_DESKTOP =
-  '/images/Free Transparent iPhone 17e Mockup (Mockuuups Studio).png'
-const PHONE_MOCKUP_MOBILE =
-  '/images/Free Transparent iPhone 17e Mockup for mobile view.png'
+import { SafeImage } from '@/components/ui/safe-image'
+import { SectionBackgroundImage } from '@/components/ui/section-background-image'
 
 export function HeroSection() {
   const mobile = HERO_PHONE.mobileIntrinsic
@@ -17,15 +12,16 @@ export function HeroSection() {
 
   return (
     <section className="relative w-full overflow-hidden min-h-[812px] lg:min-h-[981px]">
-      <div
-        className="pointer-events-none absolute inset-0 bg-[lightgray] bg-cover bg-[50%] bg-no-repeat lg:hidden"
-        style={{ backgroundImage: `url('${HERO_BG_MOBILE}')` }}
-        aria-hidden
+      <SectionBackgroundImage
+        src={ASSETS.hero.bgMobile}
+        priority
+        className="bg-[var(--color-background)] lg:hidden"
+        imageClassName="object-cover object-[50%]"
       />
-      <div
-        className="pointer-events-none absolute inset-0 hidden bg-[lightgray] bg-cover bg-[50%] bg-no-repeat lg:block"
-        style={{ backgroundImage: `url('${HERO_BG_DESKTOP}')` }}
-        aria-hidden
+      <SectionBackgroundImage
+        src={ASSETS.hero.bgDesktop}
+        className="hidden bg-[var(--color-background)] lg:block"
+        imageClassName="object-cover object-[50%]"
       />
 
       {/* Mobile phone — 522px from viewport top; no glass cards */}
@@ -38,12 +34,13 @@ export function HeroSection() {
         }}
         aria-hidden
       >
-        <Image
-          src={PHONE_MOCKUP_MOBILE}
+        <SafeImage
+          src={ASSETS.hero.phoneMobile}
           alt=""
           width={mobile.width}
           height={mobile.height}
           priority
+          sizes="(max-width: 1023px) 90vw, 0px"
           className="size-full object-contain object-top"
         />
         <div
@@ -67,12 +64,12 @@ export function HeroSection() {
         }}
         aria-hidden
       >
-        <Image
-          src={PHONE_MOCKUP_DESKTOP}
+        <SafeImage
+          src={ASSETS.hero.phoneDesktop}
           alt=""
           width={desktop.width}
           height={desktop.height}
-          priority
+          sizes="(min-width: 1024px) 420px, 0px"
           className="relative z-[1] size-full object-contain object-top"
         />
         <div

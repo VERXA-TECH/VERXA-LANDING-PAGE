@@ -1,4 +1,5 @@
 import { HeroIcon } from "@/components/hero/hero-icon"
+import { ASSETS } from "@/lib/assets"
 
 const WHITE_ICON = "brightness-0 invert"
 
@@ -6,7 +7,7 @@ function NgnDropdown() {
   return (
     <div className="flex shrink-0 items-center justify-center gap-[5.029px] rounded-[7.875px] bg-[rgba(252,253,237,0.10)] px-[3.772px] py-[2.514px] lg:gap-[7.298px] lg:rounded-[11.427px] lg:px-[5.473px] lg:py-[3.649px]">
       <HeroIcon
-        src="/icons/flags/Nigeria.svg"
+        src={ASSETS.icons.flags.nigeria}
         width={13}
         height={13}
         className="size-[8.801px] shrink-0 lg:size-[12.771px]"
@@ -15,7 +16,7 @@ function NgnDropdown() {
         NGN
       </span>
       <HeroIcon
-        src="/icons/hero/chevron-down.svg"
+        src={ASSETS.icons.hero.chevronDown}
         width={12}
         height={12}
         className={`size-[7.875px] shrink-0 lg:size-[11.427px] ${WHITE_ICON}`}
@@ -152,7 +153,7 @@ function PortfolioFooter() {
       <SuccessChangePill />
       <div className="flex items-center gap-[2px] lg:gap-[3px]">
         <HeroIcon
-          src="/icons/hero/exchange-line.svg"
+          src={ASSETS.icons.hero.exchange}
           width={15}
           height={15}
           className={`size-[10.058px] shrink-0 lg:size-[14.595px] ${WHITE_ICON}`}
@@ -187,7 +188,7 @@ export function TotalPortfolioValueCard() {
             ₦120,000.00
           </p>
           <HeroIcon
-            src="/icons/hero/eye-line.svg"
+            src={ASSETS.icons.hero.eye}
             width={22}
             height={22}
             className={`size-[7.875px] shrink-0 lg:size-[21.893px] ${WHITE_ICON}`}

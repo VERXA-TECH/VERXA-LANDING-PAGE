@@ -1,3 +1,4 @@
+import { ASSETS } from '@/lib/assets'
 import { HeroIcon } from '@/components/hero/hero-icon'
 
 type AssetItem = {
@@ -6,18 +7,18 @@ type AssetItem = {
 }
 
 const FIAT_ASSETS: AssetItem[] = [
-  { label: 'Nigerian Naira - NGN', iconSrc: '/icons/flags/Nigeria.svg' },
-  { label: 'British Pound - GBP', iconSrc: '/icons/flags/United Kingdom.svg' },
-  { label: 'Canadian Dollar - CAD', iconSrc: '/icons/flags/Canada.svg' },
-  { label: 'Ghana Cedi - GHS', iconSrc: '/icons/flags/Ghana.svg' },
-  { label: 'South African Rand - ZAR', iconSrc: '/icons/flags/South Africa.svg' },
+  { label: 'Nigerian Naira - NGN', iconSrc: ASSETS.icons.flags.nigeria },
+  { label: 'British Pound - GBP', iconSrc: ASSETS.icons.flags.uk },
+  { label: 'Canadian Dollar - CAD', iconSrc: ASSETS.icons.flags.canada },
+  { label: 'Ghana Cedi - GHS', iconSrc: ASSETS.icons.flags.ghana },
+  { label: 'South African Rand - ZAR', iconSrc: ASSETS.icons.flags.southAfrica },
 ]
 
 const CRYPTO_ASSETS: AssetItem[] = [
-  { label: 'Bitcoin - BTC', iconSrc: '/icons/wallets/Bitcoin (BTC).svg' },
-  { label: 'Ethereum - ETH', iconSrc: '/icons/wallets/Ethereum (ETH).svg' },
-  { label: 'Tether - USDT', iconSrc: '/icons/wallets/Tether USDT.svg' },
-  { label: 'USD Coin - USDC', iconSrc: '/icons/wallets/USD Coin (USDC).svg' },
+  { label: 'Bitcoin - BTC', iconSrc: ASSETS.icons.wallets.bitcoin },
+  { label: 'Ethereum - ETH', iconSrc: ASSETS.icons.wallets.ethereum },
+  { label: 'Tether - USDT', iconSrc: ASSETS.icons.wallets.usdt },
+  { label: 'USD Coin - USDC', iconSrc: ASSETS.icons.wallets.usdc },
 ]
 
 function SupportedAssetsPill() {

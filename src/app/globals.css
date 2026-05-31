@@ -19,6 +19,7 @@
 @theme {
   /* ─── Landing background (differs from app's #0B150E) ─── */
   --color-background: #060603;
+  --color-bg-white-0: #171717;
 
   /* ─── Palette — mirrors mobile global.css theme tokens ─── */
   --color-bg-soft-200: #333333;
@@ -75,6 +76,37 @@
   --text-paragraph: 0.875rem;   /* 14px */
   --text-paragraph--line-height: 1.25rem; /* 20px */
   --text-caption: 0.75rem;      /* 12px */
+}
+
+.toast-enter {
+  animation: toast-in 0.28s ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-enter {
+    animation: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 html,

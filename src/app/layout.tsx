@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ASSETS } from '@/lib/assets'
 import './globals.css'
 
 const inter = Inter({
@@ -9,6 +10,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://verxa.com',
+  ),
   title: 'Verxa — Move money across borders without limits',
   description:
     'Send and receive money instantly to over 40 countries with real exchange rates and low fees.',
@@ -16,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Verxa — Move money across borders without limits',
     description:
       'Send and receive money instantly to over 40 countries with real exchange rates and low fees.',
-    images: ['/images/verxa_logo.png'],
+    images: [ASSETS.logo],
   },
 }
 
