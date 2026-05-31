@@ -95,10 +95,12 @@ function PlusIcon({ open }: { open: boolean }) {
 
 function FaqAccordionItem({
   item,
+  panelId,
   isOpen,
   onToggle,
 }: {
   item: FaqItem
+  panelId: string
   isOpen: boolean
   onToggle: () => void
 }) {
@@ -108,6 +110,7 @@ function FaqAccordionItem({
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
+        aria-controls={panelId}
         className="flex w-full items-center justify-between gap-4 py-4 text-left"
       >
         <span
@@ -121,6 +124,7 @@ function FaqAccordionItem({
       </button>
 
       <div
+        id={panelId}
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
           isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
@@ -161,6 +165,7 @@ function FaqGroup({
       </div>
       {group.items.map((item, i) => {
         const key = `${group.category}::${i}`
+        const panelId = `faq-panel-${group.category.replace(/\s+/g, '-').toLowerCase()}-${i}`
         return (
           <div key={key}>
             {i > 0 && (
@@ -169,6 +174,7 @@ function FaqGroup({
             <div className="px-4 lg:px-5">
               <FaqAccordionItem
                 item={item}
+                panelId={panelId}
                 isOpen={openKey === key}
                 onToggle={() => onToggle(key)}
               />
