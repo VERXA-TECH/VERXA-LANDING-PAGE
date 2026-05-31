@@ -8,10 +8,16 @@ const assetsSource = fs.readFileSync(
   'utf8',
 )
 
+const fontPaths = [
+  '/fonts/HeuvelGrotesk-Regular.woff2',
+  '/fonts/HeuvelGrotesk-Medium.woff2',
+]
+
 const paths = [
-  ...new Set(
-    [...assetsSource.matchAll(/["'](\/(?:images|icons)\/[^"']+)["']/g)].map((match) => match[1]),
-  ),
+  ...new Set([
+    ...fontPaths,
+    ...[...assetsSource.matchAll(/["'](\/(?:images|icons)\/[^"']+)["']/g)].map((match) => match[1]),
+  ]),
 ]
 
 const missing = paths.filter((assetPath) => {

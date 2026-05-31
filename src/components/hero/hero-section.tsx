@@ -1,9 +1,9 @@
+import Image from 'next/image'
 import { ASSETS } from '@/lib/assets'
 import { HeroContent } from '@/components/hero/hero-content'
 import { HeroGlassCards, HERO_PHONE } from '@/components/hero/hero-glass-cards'
 import { TotalPortfolioValueCard } from '@/components/hero/glass/total-portfolio-value-card'
 import { HeroTopNav } from '@/components/hero/hero-top-nav'
-import { SafeImage } from '@/components/ui/safe-image'
 import { SectionBackgroundImage } from '@/components/ui/section-background-image'
 
 export function HeroSection() {
@@ -34,7 +34,7 @@ export function HeroSection() {
         }}
         aria-hidden
       >
-        <SafeImage
+        <Image
           src={ASSETS.hero.phoneMobile}
           alt=""
           width={mobile.width}
@@ -64,7 +64,7 @@ export function HeroSection() {
         }}
         aria-hidden
       >
-        <SafeImage
+        <Image
           src={ASSETS.hero.phoneDesktop}
           alt=""
           width={desktop.width}

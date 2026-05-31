@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "validate:assets": "node scripts/validate-assets.mjs",
-    "compress:hero": "node scripts/compress-hero-images.mjs"
+    "compress:hero": "node scripts/compress-hero-images.mjs",
+    "fonts:convert": "node scripts/convert-fonts.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",
@@ -22,6 +23,7 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "tailwindcss": "^4.1.0",
+    "ttf2woff2": "^8.0.1",
     "typescript": "^5.9.0"
   }
 }
