@@ -1,6 +1,6 @@
-import { HeroIcon } from '@/components/hero/hero-icon'
-import { ASSETS } from '@/lib/assets'
-import { GlassCard } from '@/components/ui/glass-card'
+import { HeroIcon } from "@/components/hero/hero-icon"
+import { ASSETS } from "@/lib/assets"
+import { GlassCard } from "@/components/ui/glass-card"
 
 /** Figma hero scale (~94.4% of onboarding convert card). */
 const SCALE = 7.549 / 8
@@ -37,13 +37,7 @@ const card = {
   infoIconSize: 10 * SCALE,
 } as const
 
-function CurrencyPill({
-  iconSrc,
-  code,
-}: {
-  iconSrc: string
-  code: string
-}) {
+function CurrencyPill({ iconSrc, code }: { iconSrc: string; code: string }) {
   const pill = card.currencyPill
   return (
     <div
@@ -54,11 +48,7 @@ function CurrencyPill({
         gap: pill.gap,
       }}
     >
-      <HeroIcon
-        src={iconSrc}
-        width={pill.iconSize}
-        height={pill.iconSize}
-      />
+      <HeroIcon src={iconSrc} width={pill.iconSize} height={pill.iconSize} />
       <span className="font-[family-name:var(--font-inter)] text-[5.6px] uppercase leading-[8.96px] text-white">
         {code}
       </span>
@@ -72,7 +62,7 @@ function CurrencyPill({
 }
 
 type ConvertRowProps = {
-  variant: 'source' | 'target'
+  variant: "source" | "target"
   label: string
   balanceText: string
   amount: string
@@ -90,7 +80,9 @@ function ConvertRow({
 }: ConvertRowProps) {
   const row = card.sourceRow
   const amountColor =
-    variant === 'source' ? 'text-[var(--color-lemon-50)]' : 'text-[var(--color-lemon-500)]'
+    variant === "source"
+      ? "text-[var(--color-lemon-50)]"
+      : "text-[var(--color-lemon-500)]"
 
   return (
     <div
@@ -99,10 +91,10 @@ function ConvertRow({
         height: row.height,
         padding: `${row.paddingVertical}px ${row.paddingHorizontal}px`,
         borderRadius: row.borderRadius,
-        ...(variant === 'source' && {
+        ...(variant === "source" && {
           borderWidth: row.borderWidth,
-          borderStyle: 'solid',
-          borderColor: 'var(--color-primary-base)',
+          borderStyle: "solid",
+          borderColor: "var(--color-primary-base)",
         }),
       }}
     >
@@ -187,15 +179,14 @@ export function ConvertPreviewCard() {
         </div>
       </div>
 
-      <div className="flex items-center gap-1">
+      <div className="flex items-start gap-1 self-start">
         <HeroIcon
           src={ASSETS.icons.hero.information}
           width={card.infoIconSize}
           height={card.infoIconSize}
         />
         <p className="font-[family-name:var(--font-heuvel)] text-[8.96px] font-normal leading-[13.44px] tracking-[-0.098px] text-[var(--color-text-sub-600)]">
-          Indicative rate:{' '}
-          <span className="text-white">₦1 = 1,523 USDT</span>
+          Indicative rate: <span className="text-white">₦1 = 1,523 USDT</span>
         </p>
       </div>
     </GlassCard>
