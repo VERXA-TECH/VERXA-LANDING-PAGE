@@ -96,18 +96,16 @@ function FaqGroupBlock({
         const key = `${group.category}::${i}`
         const panelId = `faq-panel-${group.category.replace(/\s+/g, '-').toLowerCase()}-${i}`
         return (
-          <div key={key}>
+          <div key={key} className="px-4 lg:px-5">
             {i > 0 && (
               <div className="h-px w-full bg-[var(--color-holly-500)]" aria-hidden />
             )}
-            <div className="px-4 lg:px-5">
-              <FaqAccordionItem
-                item={item}
-                panelId={panelId}
-                isOpen={openKey === key}
-                onToggle={() => onToggle(key)}
-              />
-            </div>
+            <FaqAccordionItem
+              item={item}
+              panelId={panelId}
+              isOpen={openKey === key}
+              onToggle={() => onToggle(key)}
+            />
           </div>
         )
       })}
