@@ -3,53 +3,35 @@ export type FaqGroup = { category: string; items: FaqItem[] }
 
 export const FAQ_GROUPS: FaqGroup[] = [
   {
-    category: 'Account',
+    category: 'Verxa',
     items: [
       {
-        q: 'How do I change my email address?',
-        a: 'You can update your email address in Settings → Account Details. Enter your new email and confirm the change via the verification link we send to your inbox.',
+        q: 'What is Verxa?',
+        a: 'Verxa is a global digital finance platform that lets you hold, send, receive, and convert both traditional and digital currencies, all from one account.',
       },
       {
-        q: 'Can I update my payment details online?',
-        a: 'Yes. Go to Settings → Payment Methods. You can add, remove, or update your card and bank account details at any time.',
+        q: 'Who is it built for?',
+        a: "It's built for people who move money across borders: international students, freelancers, remote workers, digital entrepreneurs, and more.",
       },
       {
-        q: 'What should I do if I forget my password?',
-        a: "Tap 'Forgot Password' on the login screen. We'll send a secure reset link to your registered email address.",
-      },
-    ],
-  },
-  {
-    category: 'Support',
-    items: [
-      {
-        q: 'How can I contact customer support?',
-        a: 'Reach us at hello@verxa.co or through the in-app live chat. Our team is available Monday – Friday, 8AM – 6PM WAT.',
+        q: 'What currencies does Verxa support?',
+        a: 'We support a growing list of fiat and digital currencies from day one, including GBP, CAD, NGN, GHS, ZAR, USDC, ETH, and BTC.',
       },
       {
-        q: 'Do you provide weekend assistance?',
-        a: 'We use bank-level encryption, two-factor authentication, and comply with major global standards such as PSD2, GDPR, and SOC 2.\n\nYour financial data is encrypted both at rest and in transit, and our systems are monitored 24/7 for unusual activity. We also undergo regular third-party audits to ensure the highest level of security and compliance.',
+        q: 'Is Verxa a bank?',
+        a: 'No, Verxa is a technology provider, not a bank. We connect you to regulated financial and service providers through our infrastructure.',
       },
       {
-        q: 'Is live chat support available?',
-        a: "Yes — live chat is available in-app during business hours. Outside of these hours, you can leave a message and we'll respond at the next opportunity.",
+        q: 'When is Verxa launching?',
+        a: "We're currently in the final stages of development and will be launching soon. Waitlist members will be the first to get access, so join now.",
       },
       {
-        q: 'Where can I find detailed guides?',
-        a: 'Visit our Help Center for step-by-step articles, video tutorials, and FAQs on every feature.',
-      },
-    ],
-  },
-  {
-    category: 'Payments',
-    items: [
-      {
-        q: 'How long does it take to process a payment?',
-        a: 'Most transfers complete within minutes. Depending on the corridor and method, some may take up to 1 business day.',
+        q: 'Does Verxa charge fees?',
+        a: "No, Verxa is completely free to use. We don't charge any fees for sending, receiving, or converting currencies. No hidden charges, no surprise deductions.",
       },
       {
-        q: 'Are refunds handled automatically?',
-        a: "Failed or reversed transactions are refunded automatically to your wallet balance within 24 hours. Contact support if a refund hasn't arrived after that window.",
+        q: 'Is Verxa safe to use?',
+        a: 'Yes. Security and compliance are at the core of everything we build. All financial services on Verxa are delivered through licensed and regulated partners.',
       },
     ],
   },

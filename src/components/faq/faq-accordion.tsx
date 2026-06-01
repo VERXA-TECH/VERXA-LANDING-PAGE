@@ -120,7 +120,7 @@ type FaqAccordionProps = {
 }
 
 export function FaqAccordion({ groups }: FaqAccordionProps) {
-  const [openKey, setOpenKey] = useState<string | null>('Support::1')
+  const [openKey, setOpenKey] = useState<string | null>('Verxa::0')
 
   function handleToggle(key: string) {
     setOpenKey((prev) => (prev === key ? null : key))
