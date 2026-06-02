@@ -87,7 +87,7 @@ export function WaitlistForm({ source = 'hero', variant = 'hero' }: WaitlistForm
           onSubmit={handleSubmit}
           className={
             isHero
-              ? 'flex h-14 w-full items-center gap-2 self-stretch rounded-[10px] border border-[var(--color-holly-600)] bg-[var(--color-input-bg)] py-2.5 pr-3 pl-0 shadow-[0_1px_2px_0_rgba(10,13,20,0.03)]'
+              ? 'mx-auto flex w-full max-w-[416px] items-center gap-2 self-stretch rounded-[12px] border border-[#213B35] bg-[var(--color-input-bg)] py-1.5 pr-1.5 pl-0 shadow-[0_1px_2px_0_rgba(10,13,20,0.03)]'
               : 'flex w-full max-w-[320px] flex-col gap-3 sm:flex-row sm:items-center'
           }
           noValidate
@@ -113,8 +113,8 @@ export function WaitlistForm({ source = 'hero', variant = 'hero' }: WaitlistForm
             disabled={status === 'loading'}
             className={
               isHero
-                ? 'min-w-0 flex-1 bg-transparent px-3 font-[family-name:var(--font-heuvel)] text-sm font-normal leading-5 tracking-[-0.084px] text-white placeholder:text-[var(--color-text-soft-400)] outline-none disabled:opacity-60 [font-feature-settings:\'liga\'_off,\'calt\'_off]'
-                : 'min-w-0 flex-1 rounded-[10px] border border-[var(--color-holly-600)] bg-[var(--color-holly-700)] px-3 py-3 font-[family-name:var(--font-heuvel)] text-sm text-white placeholder:text-[var(--color-holly-300)] outline-none disabled:opacity-60'
+                ? 'waitlist-email-input min-w-0 flex-1 bg-transparent px-3 font-[family-name:var(--font-heuvel)] text-sm font-normal leading-5 tracking-[-0.084px] text-white placeholder:text-[var(--color-text-soft-400)] outline-none disabled:opacity-60 [font-feature-settings:\'liga\'_off,\'calt\'_off]'
+                : 'waitlist-email-input min-w-0 flex-1 rounded-[10px] border border-[var(--color-holly-600)] bg-[var(--color-holly-700)] px-3 py-3 font-[family-name:var(--font-heuvel)] text-sm text-white placeholder:text-[var(--color-holly-300)] outline-none disabled:opacity-60'
             }
           />
           <button
@@ -122,7 +122,7 @@ export function WaitlistForm({ source = 'hero', variant = 'hero' }: WaitlistForm
             disabled={status === 'loading'}
             className={
               isHero
-                ? 'inline-flex h-[42px] shrink-0 items-center justify-center gap-2 rounded-[24px] border border-[#94BC27] bg-[#2C3308] px-5 py-3 font-[family-name:var(--font-heuvel)] text-sm font-normal leading-6 text-[#E5E8E7] transition-opacity disabled:cursor-not-allowed disabled:opacity-60 lg:text-base'
+                ? 'inline-flex h-[42px] shrink-0 items-center justify-center gap-2 rounded-[6px] border border-[#94BC27] bg-[#2C3308] px-5 py-3 font-[family-name:var(--font-heuvel)] text-sm font-normal leading-6 text-[#E5E8E7] transition-opacity disabled:cursor-not-allowed disabled:opacity-60 lg:text-base'
                 : 'inline-flex shrink-0 items-center justify-center rounded-[24px] border border-[#94BC27] bg-[var(--color-holly-700)] px-5 py-3 font-[family-name:var(--font-heuvel)] text-base text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-60'
             }
           >

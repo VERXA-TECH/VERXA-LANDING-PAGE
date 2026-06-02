@@ -1,8 +1,8 @@
 import { ConvertPreviewCard } from "@/components/hero/glass/convert-preview-card"
 import { MoneyReceivedCard } from "@/components/hero/glass/money-received-card"
 
-const PHONE_DESKTOP_INTRINSIC = { width: 375, height: 417 } as const
-const PHONE_MOBILE_INTRINSIC = { width: 258, height: 290 } as const
+const PHONE_DESKTOP_INTRINSIC = { width: 919, height: 1024 } as const
+const PHONE_MOBILE_INTRINSIC = { width: 774, height: 868 } as const
 
 function visibleHeightForWidth(
   width: number,

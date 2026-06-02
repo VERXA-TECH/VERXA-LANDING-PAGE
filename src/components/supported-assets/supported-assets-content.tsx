@@ -1,5 +1,6 @@
-import { ASSETS } from '@/lib/assets'
-import { HeroIcon } from '@/components/hero/hero-icon'
+import { ASSETS } from "@/lib/assets"
+import { HeroIcon } from "@/components/hero/hero-icon"
+import { SECTION_EYEBROW_PILL_SURFACE } from "@/components/ui/section-eyebrow-pill"
 
 type AssetItem = {
   label: string
@@ -7,23 +8,28 @@ type AssetItem = {
 }
 
 const FIAT_ASSETS: AssetItem[] = [
-  { label: 'Nigerian Naira - NGN', iconSrc: ASSETS.icons.flags.nigeria },
-  { label: 'British Pound - GBP', iconSrc: ASSETS.icons.flags.uk },
-  { label: 'Canadian Dollar - CAD', iconSrc: ASSETS.icons.flags.canada },
-  { label: 'Ghana Cedi - GHS', iconSrc: ASSETS.icons.flags.ghana },
-  { label: 'South African Rand - ZAR', iconSrc: ASSETS.icons.flags.southAfrica },
+  { label: "Nigerian Naira - NGN", iconSrc: ASSETS.icons.flags.nigeria },
+  { label: "British Pound - GBP", iconSrc: ASSETS.icons.flags.uk },
+  { label: "Canadian Dollar - CAD", iconSrc: ASSETS.icons.flags.canada },
+  { label: "Ghana Cedi - GHS", iconSrc: ASSETS.icons.flags.ghana },
+  {
+    label: "South African Rand - ZAR",
+    iconSrc: ASSETS.icons.flags.southAfrica,
+  },
 ]
 
 const CRYPTO_ASSETS: AssetItem[] = [
-  { label: 'Bitcoin - BTC', iconSrc: ASSETS.icons.wallets.bitcoin },
-  { label: 'Ethereum - ETH', iconSrc: ASSETS.icons.wallets.ethereum },
-  { label: 'Tether - USDT', iconSrc: ASSETS.icons.wallets.usdt },
-  { label: 'USD Coin - USDC', iconSrc: ASSETS.icons.wallets.usdc },
+  { label: "Bitcoin - BTC", iconSrc: ASSETS.icons.wallets.bitcoin },
+  { label: "Ethereum - ETH", iconSrc: ASSETS.icons.wallets.ethereum },
+  { label: "Tether - USDT", iconSrc: ASSETS.icons.wallets.usdt },
+  { label: "USD Coin - USDC", iconSrc: ASSETS.icons.wallets.usdc },
 ]
 
 function SupportedAssetsPill() {
   return (
-    <div className="inline-flex h-7 items-center justify-center gap-2 rounded-full border border-[#94BC27] px-3 backdrop-blur-[5.586px] [box-shadow:0_0_21.837px_0_rgba(233,211,84,0.40),0_0_21.837px_0_rgba(233,211,84,0.40)]">
+    <div
+      className={`inline-flex h-7 items-center justify-center gap-2 rounded-full ${SECTION_EYEBROW_PILL_SURFACE}`}
+    >
       <span className="text-center font-[family-name:var(--font-heuvel)] text-xs font-normal leading-4 text-[var(--color-primary-base)] [font-feature-settings:'liga'_off,'calt'_off]">
         SUPPORTED ASSETS
       </span>
@@ -33,7 +39,7 @@ function SupportedAssetsPill() {
 
 function AssetPill({ label, iconSrc }: AssetItem) {
   return (
-    <div className="inline-flex items-center gap-[8.4px] rounded-[140px] border-[0.7px] border-[#94BC27] bg-[#132722] p-[12.6px] text-center font-[family-name:var(--font-heuvel)] text-[10px] font-bold leading-[14px] tracking-[-0.06px] text-white [font-feature-settings:'liga'_off,'calt'_off] lg:gap-3 lg:rounded-[200px] lg:border lg:p-[18px] lg:text-sm lg:leading-5 lg:tracking-[-0.084px]">
+    <div className="inline-flex shrink-0 items-center gap-[8.4px] whitespace-nowrap rounded-[140px] border-[0.7px] border-[#94BC27] bg-[#132722] p-[12.6px] text-center font-[family-name:var(--font-heuvel)] text-[10px] font-bold leading-[14px] tracking-[-0.06px] text-white [font-feature-settings:'liga'_off,'calt'_off] lg:gap-3 lg:rounded-[200px] lg:border lg:p-[18px] lg:text-sm lg:leading-5 lg:tracking-[-0.084px]">
       <HeroIcon
         src={iconSrc}
         width={24}
@@ -45,9 +51,9 @@ function AssetPill({ label, iconSrc }: AssetItem) {
   )
 }
 
-function AssetRow({ assets }: { assets: AssetItem[] }) {
+function AssetRowStatic({ assets }: { assets: AssetItem[] }) {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3">
+    <div className="hidden w-full flex-nowrap items-center justify-center gap-2 lg:flex xl:gap-3">
       {assets.map((asset) => (
         <AssetPill key={asset.label} {...asset} />
       ))}
@@ -55,13 +61,39 @@ function AssetRow({ assets }: { assets: AssetItem[] }) {
   )
 }
 
+function AssetMarqueeRow({
+  assets,
+  direction,
+}: {
+  assets: AssetItem[]
+  direction: "left" | "right"
+}) {
+  const marqueeItems = [...assets, ...assets]
+
+  return (
+    <div className="relative -mx-5 w-[calc(100%+2.5rem)] overflow-hidden lg:hidden">
+      <div
+        className={`flex w-max gap-3 ${
+          direction === "left" ? "asset-marquee-left" : "asset-marquee-right"
+        }`}
+      >
+        {marqueeItems.map((asset, index) => (
+          <AssetPill key={`${asset.label}-${index}`} {...asset} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function SupportedAssetsContent() {
   return (
-    <div className="mx-auto flex w-full max-w-[736px] flex-col items-center gap-6 self-stretch">
+    <div className="mx-auto flex w-full max-w-[736px] flex-col items-center gap-6 self-stretch lg:max-w-full">
       <SupportedAssetsPill />
 
       <h2 className="w-full self-stretch text-center font-[family-name:var(--font-heuvel)] text-[32px] font-normal leading-10 tracking-[-0.16px] [font-feature-settings:'liga'_off,'calt'_off] lg:text-[48px] lg:leading-[56px] lg:tracking-[-0.48px]">
-        <span className="text-[var(--color-primary-base)]">Crypto and fiat,</span>{' '}
+        <span className="text-[var(--color-primary-base)]">
+          Crypto and fiat,
+        </span>{" "}
         <span className="text-white">together</span>
       </h2>
 
@@ -72,8 +104,10 @@ export function SupportedAssetsContent() {
       </p>
 
       <div className="flex w-full flex-col items-center gap-4 lg:gap-6">
-        <AssetRow assets={FIAT_ASSETS} />
-        <AssetRow assets={CRYPTO_ASSETS} />
+        <AssetMarqueeRow assets={FIAT_ASSETS} direction="left" />
+        <AssetRowStatic assets={FIAT_ASSETS} />
+        <AssetMarqueeRow assets={CRYPTO_ASSETS} direction="right" />
+        <AssetRowStatic assets={CRYPTO_ASSETS} />
       </div>
     </div>
   )

@@ -5,6 +5,8 @@ import { HeroGlassCards, HERO_PHONE } from '@/components/hero/hero-glass-cards'
 import { TotalPortfolioValueCard } from '@/components/hero/glass/total-portfolio-value-card'
 import { HeroTopNav } from '@/components/hero/hero-top-nav'
 import { SectionBackgroundImage } from '@/components/ui/section-background-image'
+import { HeroConicGlow } from '@/components/ui/hero-conic-glow'
+import { SectionRadialGlow } from '@/components/ui/section-radial-glow'
 
 export function HeroSection() {
   const mobile = HERO_PHONE.mobileIntrinsic
@@ -23,6 +25,9 @@ export function HeroSection() {
         className="hidden bg-[var(--color-background)] lg:block"
         imageClassName="object-cover object-[50%]"
       />
+
+      <HeroConicGlow />
+      <SectionRadialGlow />
 
       {/* Mobile phone — 522px from viewport top; no glass cards */}
       <div

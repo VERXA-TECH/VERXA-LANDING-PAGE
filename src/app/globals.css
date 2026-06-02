@@ -99,6 +99,39 @@
   }
 }
 
+@keyframes asset-marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes asset-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.asset-marquee-left {
+  animation: asset-marquee-left 35s linear infinite;
+}
+
+.asset-marquee-right {
+  animation: asset-marquee-right 35s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asset-marquee-left,
+  .asset-marquee-right {
+    animation: none;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -111,9 +144,28 @@ html {
 
 html,
 body {
+  overflow-x: hidden;
   background-color: var(--color-background);
   color: var(--color-text-strong);
   font-family: var(--font-heuvel);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Chrome/Safari autofill paints a light blue/yellow overlay by default — keep transparent */
+.waitlist-email-input:-webkit-autofill,
+.waitlist-email-input:-webkit-autofill:hover,
+.waitlist-email-input:-webkit-autofill:focus,
+.waitlist-email-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  box-shadow: 0 0 0 1000px transparent inset;
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+  transition: background-color 9999s ease-out 0s;
+}
+
+.waitlist-email-input:autofill {
+  box-shadow: 0 0 0 1000px transparent inset;
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
 }

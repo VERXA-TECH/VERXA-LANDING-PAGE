@@ -2,10 +2,10 @@
 export const ASSETS = {
   logo: "/images/verxa_logo.png",
   hero: {
-    bgDesktop: "/images/hero-bg-desktop.webp",
-    bgMobile: "/images/hero-bg-mobile.webp",
-    phoneDesktop: "/images/phone-mockup-desktop.webp",
-    phoneMobile: "/images/phone-mockup-mobile.webp",
+    bgDesktop: "/images/hero-bg-desktop.png",
+    bgMobile: "/images/hero-bg-mobile.png",
+    phoneDesktop: "/images/phone-mockup-desktop.png",
+    phoneMobile: "/images/phone-mockup-mobile.png",
     avatars: [
       "/images/hero/avatars/avatar-1.png",
       "/images/hero/avatars/avatar-2.png",
@@ -19,12 +19,13 @@ export const ASSETS = {
   },
   cta: {
     bgMark: "/images/cta-bg-mark.png",
+    bgMarkDesktop: "/images/cta-mark-desktop.png",
   },
   footer: {
-    x: "/icons/footer/x.png",
-    instagram: "/icons/footer/instagram.png",
-    linkedin: "/icons/footer/linkedin.png",
-    telegram: "/icons/footer/telegram.png",
+    x: "/icons/footer/twitter-x-line.svg",
+    instagram: "/icons/footer/instagram-fill.svg",
+    linkedin: "/icons/footer/linkedin-box-fill.svg",
+    telegram: "/icons/footer/telegram-fill.svg",
   },
   icons: {
     flags: {

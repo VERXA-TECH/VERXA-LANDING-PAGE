@@ -3,10 +3,10 @@ import { PageContainer } from '@/components/layout/page-container'
 import { SafeImage } from '@/components/ui/safe-image'
 
 const SOCIAL_LINKS = [
-  { href: 'https://x.com/verxa', label: 'X (Twitter)', icon: ASSETS.footer.x },
-  { href: 'https://instagram.com/verxa', label: 'Instagram', icon: ASSETS.footer.instagram },
-  { href: 'https://linkedin.com/company/verxa', label: 'LinkedIn', icon: ASSETS.footer.linkedin },
-  { href: 'https://t.me/verxa', label: 'Telegram', icon: ASSETS.footer.telegram },
+  { href: '/', label: 'X (Twitter)', icon: ASSETS.footer.x },
+  { href: '/', label: 'Instagram', icon: ASSETS.footer.instagram },
+  { href: '/', label: 'LinkedIn', icon: ASSETS.footer.linkedin },
+  { href: '/', label: 'Telegram', icon: ASSETS.footer.telegram },
 ] as const
 
 export function FooterSection() {
@@ -21,8 +21,6 @@ export function FooterSection() {
               <a
                 key={label}
                 href={href}
-                target="_blank"
-                rel="noopener noreferrer"
                 aria-label={label}
                 className="transition-opacity hover:opacity-80"
               >

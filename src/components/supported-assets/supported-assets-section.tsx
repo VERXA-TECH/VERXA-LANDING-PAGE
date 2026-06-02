@@ -1,6 +1,6 @@
-import { ASSETS } from '@/lib/assets'
-import { SupportedAssetsContent } from '@/components/supported-assets/supported-assets-content'
-import { SectionBackgroundImage } from '@/components/ui/section-background-image'
+import { ASSETS } from "@/lib/assets"
+import { SupportedAssetsContent } from "@/components/supported-assets/supported-assets-content"
+import { SectionBackgroundImage } from "@/components/ui/section-background-image"
 
 export function SupportedAssetsSection() {
   return (
