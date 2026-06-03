@@ -76,7 +76,7 @@ export function HeroContent() {
           from one fast, secure platform built for Nigeria.
         </p>
 
-        <div id="waitlist" className="w-full scroll-mt-28">
+        <div className="w-full">
           <WaitlistForm source="hero" variant="hero" />
         </div>
 

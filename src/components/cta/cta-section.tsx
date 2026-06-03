@@ -69,7 +69,7 @@ export function CtaSection() {
         </p>
 
         <a
-          href="#top"
+          href="#waitlist"
           className="inline-flex w-full max-w-[320px] items-center justify-center gap-2 rounded-[24px] border border-[#94BC27] bg-[var(--color-holly-700)] px-5 py-3 font-[family-name:var(--font-heuvel)] text-base font-normal leading-6 text-white transition-opacity hover:opacity-90 [font-feature-settings:'liga'_off,'calt'_off]"
         >
           Join waitlist
