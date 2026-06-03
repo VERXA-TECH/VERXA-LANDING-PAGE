@@ -43,10 +43,10 @@ export function FaqSection() {
           <p className="font-[family-name:var(--font-heuvel)] text-sm leading-5 tracking-[-0.084px] text-[var(--color-holly-300)] [font-feature-settings:'liga'_off,'calt'_off] lg:text-base lg:leading-6">
             Looking for something else?{" "}
             <a
-              href="mailto:hello@verxa.co"
+              href="mailto:hello@verxa.io"
               className="font-medium text-[var(--color-primary-base)] underline underline-offset-2 transition-opacity hover:opacity-80"
             >
-              hello@verxa.co
+              hello@verxa.io
             </a>
           </p>
         </div>

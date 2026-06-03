@@ -5,7 +5,7 @@ import { SupportedAssetsSection } from '@/components/supported-assets/supported-
 import { FaqSection } from '@/components/faq/faq-section'
 export default function Home() {
   return (
-    <main>
+    <main id="top">
       <HeroSection />
       <SupportedAssetsSection />
       <FaqSection />
