@@ -67,12 +67,17 @@ export function HeroContent() {
         <WaitlistBadge />
 
         <h1 className="w-full self-stretch text-center font-[family-name:var(--font-heuvel)] text-[32px] font-normal leading-10 tracking-[-0.16px] [font-feature-settings:'liga'_off,'calt'_off] lg:text-[48px] lg:leading-[56px] lg:tracking-[-0.48px]">
-          <span className="text-white">Move money.</span>{" "}
+          <span className="text-white">Move money.</span>
+          <span className="hidden lg:inline"> </span>
+          <br className="lg:hidden" />
           <span className="text-[var(--color-primary-base)]">Anywhere.</span>
         </h1>
 
         <p className="w-full self-stretch text-center font-[family-name:var(--font-heuvel)] text-base font-medium leading-6 tracking-[-0.176px] text-[var(--color-holly-100)] [font-feature-settings:'liga'_off,'calt'_off] lg:text-lg lg:font-normal lg:leading-6 lg:tracking-[-0.27px]">
-          Convert crypto to naira, send funds globally, and pay your bills — all
+          Convert crypto to naira, send funds globally,
+          <br className="lg:hidden" />
+          and pay your bills — all
+          <br className="lg:hidden" />
           from one fast, secure platform built for Nigeria.
         </p>
 
@@ -82,9 +87,9 @@ export function HeroContent() {
 
         <div className="flex items-center gap-3">
           <WaitlistAvatars />
-          <p className="font-[family-name:var(--font-heuvel)] text-base font-normal leading-6 tracking-[-0.176px] [font-feature-settings:'liga'_off,'calt'_off]">
-            <span className="text-[var(--color-text-sub-600)]">— Join </span>
-            <span className="text-[#D1D1D1]">
+          <p className="font-[family-name:var(--font-heuvel)] text-sm font-[342] leading-5 tracking-[-0.084px] text-[var(--color-text-sub-600)] [font-feature-settings:'liga'_off,'calt'_off] lg:text-base lg:font-normal lg:leading-6 lg:tracking-[-0.176px]">
+            <span className="lg:text-[var(--color-text-sub-600)]">— Join </span>
+            <span className="lg:text-[#D1D1D1]">
               +1,000 others on the waitlist
             </span>
           </p>
