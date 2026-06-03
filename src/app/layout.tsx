@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://verxa.io"),
   title: "Verxa — Move Money. Anywhere",
   description: siteDescription,
+  icons: {
+    icon: [{ url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" }],
+  },
   openGraph: {
     title: "Verxa — Move Money. Anywhere",
     description: siteDescription,
