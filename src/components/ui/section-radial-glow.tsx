@@ -11,7 +11,7 @@ export function SectionRadialGlow() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute left-1/2 z-[1] hidden -translate-x-1/2 lg:block"
+      className="pointer-events-none absolute left-1/2 z-[1] -translate-x-1/2"
       style={{
         top: RADIAL_GLOW.top,
         width: RADIAL_GLOW.width,

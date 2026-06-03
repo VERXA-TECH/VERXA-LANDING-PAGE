@@ -75,8 +75,10 @@ export function HeroContent() {
 
         <p className="w-full self-stretch text-center font-[family-name:var(--font-heuvel)] text-base font-medium leading-6 tracking-[-0.176px] text-[var(--color-holly-100)] [font-feature-settings:'liga'_off,'calt'_off] lg:text-lg lg:font-normal lg:leading-6 lg:tracking-[-0.27px]">
           Convert crypto to naira, send funds globally,
+          <span className="hidden lg:inline"> </span>
           <br className="lg:hidden" />
           and pay your bills — all
+          <span className="hidden lg:inline"> </span>
           <br className="lg:hidden" />
           from one fast, secure platform built for Nigeria.
         </p>
