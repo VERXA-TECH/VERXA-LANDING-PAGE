@@ -23,6 +23,9 @@ export const HERO_PHONE = {
   bottomMobile: 522 + visibleHeightForWidth(257.869, PHONE_MOBILE_INTRINSIC),
   desktopIntrinsic: PHONE_DESKTOP_INTRINSIC,
   mobileIntrinsic: PHONE_MOBILE_INTRINSIC,
+  /** Fixed layout widths — use for next/image `sizes` (never 0px when hidden via CSS). */
+  imageSizesMobile: `${Math.ceil(257.869)}px`,
+  imageSizesDesktop: `${Math.ceil(374.202)}px`,
   /** Horizontal gap between phone left edge and money card. */
   moneyCardGapLeft: 38.74,
   /** Money card top-right pivot sits this far above phone top (Figma). */

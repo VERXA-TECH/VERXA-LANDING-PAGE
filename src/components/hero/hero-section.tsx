@@ -44,7 +44,8 @@ export function HeroSection() {
           width={mobile.width}
           height={mobile.height}
           priority
-          sizes="(max-width: 1023px) 90vw, 0px"
+          unoptimized
+          sizes={HERO_PHONE.imageSizesMobile}
           className="size-full object-contain object-top"
         />
         <div
@@ -73,7 +74,8 @@ export function HeroSection() {
           alt=""
           width={desktop.width}
           height={desktop.height}
-          sizes="(min-width: 1024px) 420px, 0px"
+          unoptimized
+          sizes={HERO_PHONE.imageSizesDesktop}
           className="relative z-[1] size-full object-contain object-top"
         />
         <div
