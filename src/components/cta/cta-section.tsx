@@ -4,12 +4,6 @@ import { SafeImage } from "@/components/ui/safe-image"
 /** cta-mark-desktop.png — mark sits lower-right on a tall artboard (1476×2256). */
 const CTA_MARK_DESKTOP = {
   intrinsic: { width: 752, height: 752 },
-  /** Clip frame on the right of the section (shows only the mark area). */
-  clipWidth: 300,
-  /** Large render so the mark isn’t dwarfed by artboard padding (~65% from left). */
-  imageHeight: 752,
-  /** Bleed past the section’s right edge (Figma crop). */
-  bleedRight: 15,
   /** Align mark to section vertical center (artboard mark is below geometric center). */
   anchorTop: "50%",
   anchorTranslateY: "-45%",
@@ -37,8 +31,7 @@ export function CtaSection() {
       </div>
 
       <div
-        className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden overflow-hidden lg:block"
-        style={{ width: CTA_MARK_DESKTOP.clipWidth }}
+        className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden overflow-hidden lg:block lg:w-[220px] xl:w-[300px]"
         aria-hidden
       >
         <SafeImage
@@ -46,12 +39,9 @@ export function CtaSection() {
           alt=""
           width={CTA_MARK_DESKTOP.intrinsic.width}
           height={CTA_MARK_DESKTOP.intrinsic.height}
-          sizes="1200px"
-          className="absolute max-w-none"
+          sizes="(min-width: 1280px) 752px, 480px"
+          className="absolute max-w-none h-[480px] w-auto right-[-10px] xl:h-[752px] xl:right-[-15px]"
           style={{
-            height: CTA_MARK_DESKTOP.imageHeight,
-            width: "auto",
-            right: -CTA_MARK_DESKTOP.bleedRight,
             top: CTA_MARK_DESKTOP.anchorTop,
             transform: `translateY(${CTA_MARK_DESKTOP.anchorTranslateY})`,
           }}
