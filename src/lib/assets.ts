@@ -14,8 +14,7 @@ export const ASSETS = {
     ] as const,
   },
   supportedAssets: {
-    bgDesktop: "/images/supported-assets-bg.png",
-    bgMobile: "/images/supported-assets-bg-mobile.png",
+    background: "/images/supported-assets-background.png",
   },
   cta: {
     bgMark: "/images/cta-bg-mark.png",

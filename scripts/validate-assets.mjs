@@ -22,9 +22,12 @@ const fontPaths = [
   '/fonts/HeuvelGrotesk-Medium.woff2',
 ]
 
+const staticPaths = ['/favicon-48x48.png']
+
 const paths = [
   ...new Set([
     ...fontPaths,
+    ...staticPaths,
     ...[...assetsSource.matchAll(/["'](\/(?:images|icons)\/[^"']+)["']/g)].map((match) => match[1]),
   ]),
 ]
