@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server"
 import {
   isValidWaitlistEmail,
   normalizeWaitlistEmail,
   signUpForWaitlist,
-} from '@/lib/waitlist'
+} from "@/lib/waitlist"
 
 export async function POST(request: Request) {
   let body: unknown
@@ -11,23 +11,32 @@ export async function POST(request: Request) {
   try {
     body = await request.json()
   } catch {
-    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 },
+    )
   }
 
-  if (!body || typeof body !== 'object') {
-    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
+  if (!body || typeof body !== "object") {
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 },
+    )
   }
 
   const { email: rawEmail } = body as { email?: unknown }
 
-  if (typeof rawEmail !== 'string') {
-    return NextResponse.json({ error: 'Email is required.' }, { status: 400 })
+  if (typeof rawEmail !== "string") {
+    return NextResponse.json({ error: "Email is required." }, { status: 400 })
   }
 
   const email = normalizeWaitlistEmail(rawEmail)
 
   if (!isValidWaitlistEmail(email)) {
-    return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 })
+    return NextResponse.json(
+      { error: "Enter a valid email address." },
+      { status: 400 },
+    )
   }
 
   try {
@@ -45,9 +54,9 @@ export async function POST(request: Request) {
         : "You're on the list! We'll be in touch soon.",
     })
   } catch (error) {
-    console.error('Waitlist API error:', error)
+    console.error("Waitlist API error:", error)
     return NextResponse.json(
-      { error: 'Waitlist is unavailable right now. Please try again later.' },
+      { error: "Waitlist is unavailable right now. Please try again later." },
       { status: 503 },
     )
   }
