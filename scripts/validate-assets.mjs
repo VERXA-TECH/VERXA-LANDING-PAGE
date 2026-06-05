@@ -1,34 +1,36 @@
-import fs from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import fs from "node:fs"
+import path from "node:path"
+import { fileURLToPath } from "node:url"
 
-const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
-const publicDir = path.join(root, 'public')
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..")
+const publicDir = path.join(root, "public")
 const assetsSource = fs.readFileSync(
-  path.join(root, 'src/lib/assets.ts'),
-  'utf8',
+  path.join(root, "src/lib/assets.ts"),
+  "utf8",
 )
 
 /** PNG size budgets for hero assets served directly from /public. */
 const HERO_PNG_LIMITS_KB = {
-  'images/hero-bg-mobile.png': 400,
-  'images/hero-bg-desktop.png': 1400,
-  'images/phone-mockup-mobile.png': 550,
-  'images/phone-mockup-desktop.png': 900,
+  "images/hero-bg-mobile.png": 400,
+  "images/hero-bg-desktop.png": 1400,
+  "images/phone-mockup-mobile.png": 550,
+  "images/phone-mockup-desktop.png": 900,
 }
 
 const fontPaths = [
-  '/fonts/HeuvelGrotesk-Regular.woff2',
-  '/fonts/HeuvelGrotesk-Medium.woff2',
+  "/fonts/HeuvelGrotesk-Regular.woff2",
+  "/fonts/HeuvelGrotesk-Medium.woff2",
 ]
 
-const staticPaths = ['/favicon-48x48.png']
+const staticPaths = ["/favicon-48x48.png"]
 
 const paths = [
   ...new Set([
     ...fontPaths,
     ...staticPaths,
-    ...[...assetsSource.matchAll(/["'](\/(?:images|icons)\/[^"']+)["']/g)].map((match) => match[1]),
+    ...[...assetsSource.matchAll(/["'](\/(?:images|icons)\/[^"']+)["']/g)].map(
+      (match) => match[1],
+    ),
   ]),
 ]
 
@@ -38,30 +40,36 @@ const missing = paths.filter((assetPath) => {
 })
 
 if (missing.length > 0) {
-  console.error('Missing public assets:')
+  console.error("Missing public assets:")
   missing.forEach((assetPath) => console.error(`  - ${assetPath}`))
   process.exit(1)
 }
 
-const oversized = Object.entries(HERO_PNG_LIMITS_KB).flatMap(([relativePath, limitKb]) => {
-  const filePath = path.join(publicDir, relativePath)
+const oversized = Object.entries(HERO_PNG_LIMITS_KB).flatMap(
+  ([relativePath, limitKb]) => {
+    const filePath = path.join(publicDir, relativePath)
 
-  if (!fs.existsSync(filePath)) {
-    return []
-  }
+    if (!fs.existsSync(filePath)) {
+      return []
+    }
 
-  const sizeKb = fs.statSync(filePath).size / 1024
-  if (sizeKb <= limitKb) {
-    console.log(`${relativePath}: ${sizeKb.toFixed(1)} KB (limit ${limitKb} KB) OK`)
-    return []
-  }
+    const sizeKb = fs.statSync(filePath).size / 1024
+    if (sizeKb <= limitKb) {
+      console.log(
+        `${relativePath}: ${sizeKb.toFixed(1)} KB (limit ${limitKb} KB) OK`,
+      )
+      return []
+    }
 
-  console.error(`${relativePath}: ${sizeKb.toFixed(1)} KB (limit ${limitKb} KB) OVER LIMIT`)
-  return [relativePath]
-})
+    console.error(
+      `${relativePath}: ${sizeKb.toFixed(1)} KB (limit ${limitKb} KB) OVER LIMIT`,
+    )
+    return [relativePath]
+  },
+)
 
 if (oversized.length > 0) {
-  console.error('One or more hero PNGs exceeded size limits.')
+  console.error("One or more hero PNGs exceeded size limits.")
   process.exit(1)
 }
 
