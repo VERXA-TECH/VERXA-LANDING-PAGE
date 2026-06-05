@@ -3,10 +3,7 @@ import {
   isValidWaitlistEmail,
   normalizeWaitlistEmail,
   signUpForWaitlist,
-  type WaitlistSource,
 } from '@/lib/waitlist'
-
-const ALLOWED_SOURCES = new Set<WaitlistSource>(['hero', 'landing', 'cta'])
 
 export async function POST(request: Request) {
   let body: unknown
@@ -21,10 +18,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
-  const { email: rawEmail, source: rawSource } = body as {
-    email?: unknown
-    source?: unknown
-  }
+  const { email: rawEmail } = body as { email?: unknown }
 
   if (typeof rawEmail !== 'string') {
     return NextResponse.json({ error: 'Email is required.' }, { status: 400 })
@@ -36,13 +30,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 })
   }
 
-  const source: WaitlistSource =
-    typeof rawSource === 'string' && ALLOWED_SOURCES.has(rawSource as WaitlistSource)
-      ? (rawSource as WaitlistSource)
-      : 'landing'
-
   try {
-    const result = await signUpForWaitlist(email, source)
+    const result = await signUpForWaitlist(email)
 
     if (!result.ok) {
       return NextResponse.json({ error: result.error }, { status: 500 })

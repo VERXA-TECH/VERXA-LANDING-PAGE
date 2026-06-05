@@ -1,17 +1,15 @@
 'use client'
 
 import { useCallback, useState, type FormEvent } from 'react'
-import type { WaitlistSource } from '@/lib/waitlist'
 import { Toast, getWaitlistToastContent, type ToastContent } from '@/components/ui/toast'
 
 type WaitlistFormProps = {
-  source?: WaitlistSource
   variant?: 'hero' | 'compact'
 }
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error'
 
-export function WaitlistForm({ source = 'hero', variant = 'hero' }: WaitlistFormProps) {
+export function WaitlistForm({ variant = 'hero' }: WaitlistFormProps) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<FormStatus>('idle')
   const [toast, setToast] = useState<ToastContent | null>(null)
@@ -24,7 +22,7 @@ export function WaitlistForm({ source = 'hero', variant = 'hero' }: WaitlistForm
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    if (status === 'loading') {
+    if (status === 'loading' || email.trim() === '') {
       return
     }
 
@@ -35,7 +33,7 @@ export function WaitlistForm({ source = 'hero', variant = 'hero' }: WaitlistForm
       const response = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source }),
+        body: JSON.stringify({ email }),
       })
 
       const data = (await response.json()) as {
@@ -71,6 +69,7 @@ export function WaitlistForm({ source = 'hero', variant = 'hero' }: WaitlistForm
   }
 
   const isHero = variant === 'hero'
+  const isSubmitDisabled = status === 'loading' || email.trim() === ''
 
   return (
     <>
@@ -119,11 +118,11 @@ export function WaitlistForm({ source = 'hero', variant = 'hero' }: WaitlistForm
           />
           <button
             type="submit"
-            disabled={status === 'loading'}
+            disabled={isSubmitDisabled}
             className={
               isHero
-                ? 'inline-flex h-[42px] shrink-0 items-center justify-center gap-2 rounded-[6px] border border-[#94BC27] bg-[#2C3308] px-5 py-3 font-[family-name:var(--font-heuvel)] text-sm font-normal leading-6 text-[#E5E8E7] transition-opacity disabled:cursor-not-allowed disabled:opacity-60 lg:text-base'
-                : 'inline-flex shrink-0 items-center justify-center rounded-[24px] border border-[#94BC27] bg-[var(--color-holly-700)] px-5 py-3 font-[family-name:var(--font-heuvel)] text-base text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-60'
+                ? 'inline-flex h-[42px] shrink-0 cursor-pointer items-center justify-center gap-2 rounded-[6px] border border-[#94BC27] bg-[#2C3308] px-5 py-3 font-[family-name:var(--font-heuvel)] text-sm font-normal leading-6 text-[#E5E8E7] transition-opacity disabled:cursor-not-allowed disabled:opacity-60 lg:text-base'
+                : 'inline-flex shrink-0 cursor-pointer items-center justify-center rounded-[24px] border border-[#94BC27] bg-[var(--color-holly-700)] px-5 py-3 font-[family-name:var(--font-heuvel)] text-base text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-60'
             }
           >
             {status === 'loading' ? 'Joining…' : 'Join waitlist'}

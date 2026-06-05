@@ -3,7 +3,7 @@ create table if not exists public.waitlist (
   id uuid primary key default gen_random_uuid(),
   email text not null unique,
   created_at timestamptz not null default now(),
-  source text default 'landing'
+  source text default 'hero'
 );
 
 create index if not exists waitlist_created_at_idx

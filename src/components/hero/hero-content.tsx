@@ -84,7 +84,7 @@ export function HeroContent() {
         </p>
 
         <div className="w-full">
-          <WaitlistForm source="hero" variant="hero" />
+          <WaitlistForm variant="hero" />
         </div>
 
         <div className="flex items-center gap-3">

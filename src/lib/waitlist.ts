@@ -1,10 +1,10 @@
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-export type WaitlistSource = 'hero' | 'landing' | 'cta'
-
 export type WaitlistSignupResult =
   | { ok: true; alreadyRegistered: boolean }
   | { ok: false; error: string }
+
+const WAITLIST_SOURCE = 'hero' as const
 
 export function normalizeWaitlistEmail(raw: string): string {
   return raw.trim().toLowerCase()
@@ -14,16 +14,13 @@ export function isValidWaitlistEmail(email: string): boolean {
   return EMAIL_PATTERN.test(email) && email.length <= 320
 }
 
-export async function signUpForWaitlist(
-  email: string,
-  source: WaitlistSource = 'landing',
-): Promise<WaitlistSignupResult> {
+export async function signUpForWaitlist(email: string): Promise<WaitlistSignupResult> {
   const { getSupabaseAdmin } = await import('@/lib/supabase/admin')
   const supabase = getSupabaseAdmin()
 
   const { error } = await supabase.from('waitlist').insert({
     email,
-    source,
+    source: WAITLIST_SOURCE,
   })
 
   if (!error) {
