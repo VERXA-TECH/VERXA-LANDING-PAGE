@@ -3,8 +3,9 @@ import { PageContainer } from '@/components/layout/page-container'
 import { SafeImage } from '@/components/ui/safe-image'
 
 const SOCIAL_LINKS = [
-  { href: '/', label: 'X (Twitter)', icon: ASSETS.footer.x },
-  { href: '/', label: 'Instagram', icon: ASSETS.footer.instagram },
+  { href: 'https://x.com/verxahq', label: 'X (Twitter)', icon: ASSETS.footer.x },
+  { href: 'https://www.instagram.com/verxahq/', label: 'Instagram', icon: ASSETS.footer.instagram },
+  { href: 'https://www.tiktok.com/@verxahq?lang=en', label: 'TikTok', icon: ASSETS.footer.tiktok },
   { href: '/', label: 'LinkedIn', icon: ASSETS.footer.linkedin },
   { href: '/', label: 'Telegram', icon: ASSETS.footer.telegram },
 ] as const
@@ -22,6 +23,7 @@ export function FooterSection() {
                 key={label}
                 href={href}
                 aria-label={label}
+                {...(href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
                 className="transition-opacity hover:opacity-80"
               >
                 <SafeImage src={icon} alt="" width={20} height={20} className="size-5" />

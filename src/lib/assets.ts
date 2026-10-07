@@ -23,6 +23,7 @@ export const ASSETS = {
   footer: {
     x: "/icons/footer/twitter-x-line.svg",
     instagram: "/icons/footer/instagram-fill.svg",
+    tiktok: "/icons/footer/tiktok-fill.svg",
     linkedin: "/icons/footer/linkedin-box-fill.svg",
     telegram: "/icons/footer/telegram-fill.svg",
   },
