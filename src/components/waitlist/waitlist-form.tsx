@@ -6,6 +6,7 @@ import {
   getWaitlistToastContent,
   type ToastContent,
 } from "@/components/ui/toast"
+import { trackEvent } from "@/lib/analytics"
 
 type WaitlistFormProps = {
   variant?: "hero" | "compact"
@@ -58,6 +59,11 @@ export function WaitlistForm({ variant = "hero" }: WaitlistFormProps) {
 
       setStatus("success")
       setEmail("")
+      trackEvent("sign_up", {
+        method: "waitlist",
+        form_variant: variant,
+        already_registered: data.alreadyRegistered ?? false,
+      })
       setToast(
         getWaitlistToastContent("success", {
           alreadyRegistered: data.alreadyRegistered,
