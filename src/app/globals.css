@@ -125,9 +125,14 @@
   animation: asset-marquee-right 35s linear infinite;
 }
 
+.footer-wordmark-marquee {
+  animation: asset-marquee-left 40s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .asset-marquee-left,
-  .asset-marquee-right {
+  .asset-marquee-right,
+  .footer-wordmark-marquee {
     animation: none;
   }
 }
