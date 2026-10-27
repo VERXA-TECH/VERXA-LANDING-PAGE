@@ -10,6 +10,9 @@ const SOCIAL_LINKS = [
   { href: '/', label: 'Telegram', icon: ASSETS.footer.telegram },
 ] as const
 
+/** Copies per marquee half — each "Verxa" is ~60vw, so 3 always overfills the viewport */
+const WORDMARK_REPEAT = 3
+
 export function FooterSection() {
   return (
     <footer className="flex w-full flex-col self-stretch bg-[var(--color-background)] pt-6 lg:pt-20">
@@ -41,9 +44,18 @@ export function FooterSection() {
         className="h-[clamp(93px,12.5vw,232px)] w-full overflow-hidden"
         aria-hidden
       >
-        <p className="text-center font-[family-name:var(--font-heuvel)] text-[clamp(149.678px,21vw,372px)] font-[550] leading-none tracking-[clamp(-3.892px,-0.256vw,-9.672px)] text-[rgba(98,117,112,0.26)] [font-feature-settings:'liga'_off,'calt'_off]">
-          Verxa
-        </p>
+        <div className="font-[family-name:var(--font-heuvel)] text-[clamp(149.678px,21vw,372px)] font-[550] leading-none tracking-[clamp(-3.892px,-0.256vw,-9.672px)] text-[rgba(98,117,112,0.26)] [font-feature-settings:'liga'_off,'calt'_off]">
+          <p className="text-center motion-safe:hidden">Verxa</p>
+
+          {/* Two identical halves so the -50% loop is seamless */}
+          <div className="footer-wordmark-marquee hidden w-max motion-safe:flex">
+            {Array.from({ length: WORDMARK_REPEAT * 2 }, (_, i) => (
+              <span key={i} className="shrink-0 pr-[0.25em]">
+                Verxa
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </footer>
   )

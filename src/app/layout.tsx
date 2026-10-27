@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import Script from "next/script"
 import { FAQ_GROUPS } from "@/components/faq/faq-data"
 import { ASSETS } from "@/lib/assets"
 import { SiteJsonLd } from "@/components/seo/site-json-ld"
+import { GA_MEASUREMENT_ID } from "@/lib/analytics"
 import "./globals.css"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.verxa.io"
@@ -67,7 +69,21 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable}>
+        {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+      </body>
     </html>
   )
 }

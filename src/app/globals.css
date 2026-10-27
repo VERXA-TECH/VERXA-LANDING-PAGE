@@ -125,9 +125,61 @@
   animation: asset-marquee-right 35s linear infinite;
 }
 
+.footer-wordmark-marquee {
+  animation: asset-marquee-left 40s linear infinite;
+}
+
+/* ─── Hero portfolio card: rise in, then gentle vertical float ─── */
+@keyframes portfolio-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes portfolio-card-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.hero-portfolio-card {
+  animation:
+    portfolio-card-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both,
+    portfolio-card-float 6s ease-in-out 1.1s infinite;
+}
+
+/*
+ * Mobile phone + portfolio card: the card overhangs the phone's left edge by
+ * ~45px, so on narrow screens nudge the phone right until the card clears a
+ * 16px gutter (card left = 50vw - 173.8px). Below 350px, also shrink slightly.
+ */
+.hero-phone-mobile-fit {
+  margin-left: max(0px, calc(189.8px - 50vw));
+}
+
+@media (max-width: 350px) {
+  .hero-phone-mobile-fit {
+    scale: 0.92;
+    transform-origin: top center;
+    margin-top: 12px;
+    margin-left: max(0px, calc(175.9px - 50vw));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .asset-marquee-left,
-  .asset-marquee-right {
+  .asset-marquee-right,
+  .footer-wordmark-marquee,
+  .hero-portfolio-card {
     animation: none;
   }
 }
