@@ -30,7 +30,7 @@ export function HeroSection() {
 
       {/* Mobile phone — 522px from viewport top; no glass cards */}
       <div
-        className="pointer-events-none absolute left-1/2 z-[2] -translate-x-1/2 lg:hidden"
+        className="hero-phone-mobile-fit pointer-events-none absolute left-1/2 z-[2] -translate-x-1/2 lg:hidden"
         style={{
           top: HERO_PHONE.topMobile,
           width: HERO_PHONE.widthMobile,
@@ -49,7 +49,7 @@ export function HeroSection() {
           className="size-full object-contain object-top"
         />
         <div
-          className="absolute z-[2]"
+          className="hero-portfolio-card absolute z-[2]"
           style={{
             top: HERO_PHONE.portfolioCardTopMobile,
             right: HERO_PHONE.portfolioCardRightMobile,
@@ -79,7 +79,7 @@ export function HeroSection() {
           className="relative z-[1] size-full object-contain object-top"
         />
         <div
-          className="absolute z-[2]"
+          className="hero-portfolio-card absolute z-[2]"
           style={{
             top: HERO_PHONE.portfolioCardTopDesktop,
             right: HERO_PHONE.portfolioCardRightDesktop,
