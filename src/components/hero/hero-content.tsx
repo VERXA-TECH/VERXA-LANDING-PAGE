@@ -63,8 +63,10 @@ function WaitlistAvatars() {
 export function HeroContent() {
   return (
     <PageContainer>
-      <div className="mx-auto flex w-full max-w-[736px] flex-col items-center gap-6 self-stretch pt-6 lg:pt-10">
-        <WaitlistBadge />
+      <div className="mx-auto flex w-full max-w-[736px] flex-col items-center gap-6 self-stretch pt-6 lg:pt-[33px]">
+        <div className="lg:mb-2">
+          <WaitlistBadge />
+        </div>
 
         <h1 className="w-full self-stretch text-center font-[family-name:var(--font-heuvel)] text-[32px] font-normal leading-10 tracking-[-0.16px] [font-feature-settings:'liga'_off,'calt'_off] lg:text-[48px] lg:leading-[56px] lg:tracking-[-0.48px]">
           <span className="text-white">Move money.</span>
@@ -77,10 +79,9 @@ export function HeroContent() {
           Convert crypto to naira, send funds globally,
           <span className="hidden lg:inline"> </span>
           <br className="lg:hidden" />
-          and pay your bills — all
-          <span className="hidden lg:inline"> </span>
-          <br className="lg:hidden" />
-          from one fast, secure platform built for Nigeria.
+          and pay your bills — all from
+          <br />
+          one fast, secure platform built for Nigeria.
         </p>
 
         <div className="w-full">

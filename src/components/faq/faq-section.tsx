@@ -26,7 +26,7 @@ export function FaqSection() {
           <div className="flex flex-col items-center gap-4 text-center">
             <FaqPill />
 
-            <h2 className="font-[family-name:var(--font-heuvel)] text-[32px] font-normal leading-10 tracking-[-0.16px] text-white [font-feature-settings:'liga'_off,'calt'_off] lg:text-[48px] lg:leading-[56px] lg:tracking-[-0.48px]">
+            <h2 className="font-[family-name:var(--font-heuvel)] text-[32px] font-normal leading-10 tracking-[-0.16px] text-white [font-feature-settings:'liga'_off,'calt'_off] lg:whitespace-nowrap lg:text-[48px] lg:leading-[56px] lg:tracking-[-0.48px]">
               Get quick answers to{" "}
               <span className="text-[var(--color-primary-base)]">
                 common questions

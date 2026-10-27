@@ -5,6 +5,9 @@ import { SECTION_EYEBROW_PILL_SURFACE } from "@/components/ui/section-eyebrow-pi
 type AssetItem = {
   label: string
   iconSrc: string
+  /** Coin icons sit on a filled circle; some glyphs bleed past it (28px in a 24px circle) */
+  iconBg?: string
+  iconOversize?: boolean
 }
 
 const FIAT_ASSETS: AssetItem[] = [
@@ -19,10 +22,28 @@ const FIAT_ASSETS: AssetItem[] = [
 ]
 
 const CRYPTO_ASSETS: AssetItem[] = [
-  { label: "Bitcoin - BTC", iconSrc: ASSETS.icons.wallets.bitcoin },
-  { label: "Ethereum - ETH", iconSrc: ASSETS.icons.wallets.ethereum },
-  { label: "Tether - USDT", iconSrc: ASSETS.icons.wallets.usdt },
-  { label: "USD Coin - USDC", iconSrc: ASSETS.icons.wallets.usdc },
+  {
+    label: "Bitcoin - BTC",
+    iconSrc: ASSETS.icons.wallets.bitcoin,
+    iconBg: "#ffffff",
+    iconOversize: true,
+  },
+  {
+    label: "Ethereum - ETH",
+    iconSrc: ASSETS.icons.wallets.ethereum,
+    iconBg: "#8c71f6",
+  },
+  {
+    label: "Tether - USDT",
+    iconSrc: ASSETS.icons.wallets.usdt,
+    iconBg: "#1daf9c",
+  },
+  {
+    label: "USD Coin - USDC",
+    iconSrc: ASSETS.icons.wallets.usdc,
+    iconBg: "#ffffff",
+    iconOversize: true,
+  },
 ]
 
 function SupportedAssetsPill() {
@@ -37,15 +58,30 @@ function SupportedAssetsPill() {
   )
 }
 
-function AssetPill({ label, iconSrc }: AssetItem) {
+function AssetPill({ label, iconSrc, iconBg, iconOversize }: AssetItem) {
   return (
     <div className="inline-flex shrink-0 items-center gap-[8.4px] whitespace-nowrap rounded-[140px] border-[0.7px] border-[#94BC27] bg-[#132722] p-[12.6px] text-center font-[family-name:var(--font-heuvel)] text-[10px] font-bold leading-[14px] tracking-[-0.06px] text-white [font-feature-settings:'liga'_off,'calt'_off] lg:gap-3 lg:rounded-[200px] lg:border lg:p-[18px] lg:text-sm lg:leading-5 lg:tracking-[-0.084px]">
-      <HeroIcon
-        src={iconSrc}
-        width={24}
-        height={24}
-        className="size-[16.8px] shrink-0 lg:size-6"
-      />
+      {iconBg ? (
+        <span
+          className="relative size-[16.8px] shrink-0 overflow-hidden rounded-full lg:size-6"
+          style={{ backgroundColor: iconBg }}
+        >
+          <HeroIcon
+            src={iconSrc}
+            width={iconOversize ? 28 : 24}
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
+              iconOversize ? "size-[116.67%]" : "size-full"
+            }`}
+          />
+        </span>
+      ) : (
+        <HeroIcon
+          src={iconSrc}
+          width={24}
+          height={24}
+          className="size-[16.8px] shrink-0 lg:size-6"
+        />
+      )}
       <span>{label}</span>
     </div>
   )
