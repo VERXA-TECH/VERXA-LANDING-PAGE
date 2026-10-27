@@ -1,12 +1,18 @@
 "use client"
 
-import { useCallback, useState, type FormEvent } from "react"
+import { useCallback, useId, useRef, useState, type FormEvent } from "react"
 import {
   Toast,
   getWaitlistToastContent,
   type ToastContent,
 } from "@/components/ui/toast"
 import { trackEvent } from "@/lib/analytics"
+import type { WaitlistSource } from "@/lib/waitlist"
+import {
+  Turnstile,
+  TurnstileCancelledError,
+  type TurnstileHandle,
+} from "./turnstile"
 
 type WaitlistFormProps = {
   variant?: "hero" | "compact"
@@ -14,8 +20,21 @@ type WaitlistFormProps = {
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
+// TODO: confirm the CTA value with backend (plan #2a).
+const SOURCE_BY_VARIANT: Record<
+  NonNullable<WaitlistFormProps["variant"]>,
+  WaitlistSource
+> = {
+  hero: "landing-hero",
+  compact: "landing-cta",
+}
+
 export function WaitlistForm({ variant = "hero" }: WaitlistFormProps) {
   const [email, setEmail] = useState("")
+  const [website, setWebsite] = useState("")
+  const turnstileRef = useRef<TurnstileHandle>(null)
+  const emailId = useId()
+  const honeypotId = useId()
   const [status, setStatus] = useState<FormStatus>("idle")
   const [toast, setToast] = useState<ToastContent | null>(null)
 
@@ -34,11 +53,34 @@ export function WaitlistForm({ variant = "hero" }: WaitlistFormProps) {
     setStatus("loading")
     setToast(null)
 
+    let captchaToken: string
+    try {
+      captchaToken = await turnstileRef.current!.getToken()
+    } catch (error) {
+      setStatus("idle")
+      if (!(error instanceof TurnstileCancelledError)) {
+        setToast(
+          getWaitlistToastContent("error", {
+            errorMessage:
+              error instanceof Error
+                ? error.message
+                : "We couldn't verify you. Please try again.",
+          }),
+        )
+      }
+      return
+    }
+
     try {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          email,
+          captchaToken,
+          source: SOURCE_BY_VARIANT[variant],
+          website,
+        }),
       })
 
       const data = (await response.json()) as {
@@ -102,11 +144,11 @@ export function WaitlistForm({ variant = "hero" }: WaitlistFormProps) {
           }
           noValidate
         >
-          <label htmlFor="waitlist-email" className="sr-only">
+          <label htmlFor={emailId} className="sr-only">
             Email address
           </label>
           <input
-            id="waitlist-email"
+            id={emailId}
             type="email"
             name="email"
             value={email}
@@ -127,6 +169,22 @@ export function WaitlistForm({ variant = "hero" }: WaitlistFormProps) {
                 : "waitlist-email-input min-w-0 flex-1 rounded-[10px] border border-[var(--color-holly-600)] bg-[var(--color-holly-700)] px-3 py-3 font-[family-name:var(--font-heuvel)] text-sm text-white placeholder:text-[var(--color-holly-300)] outline-none disabled:opacity-60"
             }
           />
+          {/* Honeypot: hidden off-screen (not display:none, which some bots skip). */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden"
+          >
+            <label htmlFor={honeypotId}>Website</label>
+            <input
+              id={honeypotId}
+              type="text"
+              name="website"
+              value={website}
+              onChange={(event) => setWebsite(event.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
           <button
             type="submit"
             disabled={isSubmitDisabled}
@@ -139,6 +197,7 @@ export function WaitlistForm({ variant = "hero" }: WaitlistFormProps) {
             {status === "loading" ? "Joining…" : "Join waitlist"}
           </button>
         </form>
+        <Turnstile ref={turnstileRef} />
       </div>
     </>
   )
