@@ -13,7 +13,7 @@ function successResponse(alreadyRegistered: boolean) {
     alreadyRegistered,
     message: alreadyRegistered
       ? "You're already on the waitlist."
-      : "You're on the list! We'll be in touch soon.",
+      : "Check your email to confirm your spot on the waitlist.",
   })
 }
 

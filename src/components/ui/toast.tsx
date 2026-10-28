@@ -161,7 +161,7 @@ export function getWaitlistToastContent(
 
   return {
     variant: 'success',
-    title: "You're on the waitlist.",
-    description: "We'll be in touch soon.",
+    title: 'Check your email.',
+    description: 'We sent you a link to confirm your spot on the waitlist.',
   }
 }
