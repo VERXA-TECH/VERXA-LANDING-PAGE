@@ -3,9 +3,8 @@ import Link from "next/link"
 import { ASSETS } from "@/lib/assets"
 import { SafeImage } from "@/components/ui/safe-image"
 
-// Backend confirms the email, then redirects here with ?status=…
-// Only "confirmed" is known so far; anything else gets the "link didn't work" state.
-// TODO: confirm the other status values with backend (e.g. expired, invalid).
+// Backend confirms the email, then redirects here with
+// ?status=confirmed | invalid | error. Unknown or missing values show "invalid".
 export const metadata: Metadata = {
   title: "Confirm your email — Verxa",
   robots: {
@@ -21,13 +20,23 @@ const CONTENT = {
       "Your email is confirmed. We'll email you as soon as Verxa is ready for you.",
     cta: { href: "/", label: "Back to Verxa" },
   },
-  failed: {
+  invalid: {
     title: "This link didn't work",
     description:
-      "It may have expired or already been used. Join the waitlist again and we'll send you a new link.",
+      "This link is invalid or has expired. If you already confirmed, you're all set. Otherwise, join again to get a new link.",
     cta: { href: "/#waitlist", label: "Join the waitlist" },
   },
+  error: {
+    title: "Something went wrong",
+    description:
+      "We couldn't confirm your email just now. Please try the link in your email again in a few minutes.",
+    cta: { href: "/", label: "Back to Verxa" },
+  },
 } as const
+
+function isConfirmStatus(value: unknown): value is keyof typeof CONTENT {
+  return typeof value === "string" && Object.hasOwn(CONTENT, value)
+}
 
 type WaitlistConfirmPageProps = {
   searchParams: Promise<{ status?: string | string[] }>
@@ -37,7 +46,7 @@ export default async function WaitlistConfirmPage({
   searchParams,
 }: WaitlistConfirmPageProps) {
   const { status } = await searchParams
-  const content = status === "confirmed" ? CONTENT.confirmed : CONTENT.failed
+  const content = CONTENT[isConfirmStatus(status) ? status : "invalid"]
 
   return (
     <main className="flex min-h-svh flex-col items-center justify-center gap-6 bg-[var(--color-background)] px-5 py-16 text-center">
