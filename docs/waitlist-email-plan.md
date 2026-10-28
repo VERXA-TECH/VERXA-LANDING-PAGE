@@ -40,7 +40,7 @@ _Last updated: 2026-10-27_
 | 4 | Is backend verifying the Turnstile token? | Yes, sent as `captchaToken` | ✅ Answered |
 | 5 | Prod domain + `localhost` added to Turnstile allowed hostnames | `127.0.0.1`, `localhost`, `verxa.io`, `www.verxa.io` added (widget mode: Managed) | ✅ Answered |
 | 6 | Confirmation page: link from the email with a token, or just a success page? | Backend handles the token, then redirects to `/waitlist/confirm?status=confirmed` | ✅ Answered |
-| 7 | Other `status` values backend can redirect with (expired / invalid / already confirmed?) | | ⏳ Pending |
+| 7 | Other `status` values backend can redirect with | `confirmed`, `invalid`, `error` (+ copy for `invalid`) | ✅ Answered |
 | 8 | Does the landing page still save signups to Supabase, or does backend store them now? | Both: backend stores in its DB, landing page keeps its Supabase copy | ✅ Answered |
 | 9 | Signing up twice: does backend resend the email or ignore it? | | ⏳ Pending |
 | 10 | Switch the Turnstile widget to Invisible mode in the Cloudflare dashboard (so the checkbox never shows) | | ⏳ Pending |
@@ -62,7 +62,7 @@ _Last updated: 2026-10-27_
   - Map backend responses to form messages (#2b)
   - Short timeout (~5s)
   - Decide what the visitor sees if the backend fails (depends on #8)
-- [x] **Confirmation page** at `src/app/waitlist/confirm/page.tsx`: `status=confirmed` shows success, any other value shows "link didn't work" (other status values still to confirm, #7)
+- [x] **Confirmation page** at `src/app/waitlist/confirm/page.tsx`: states for `status=confirmed`, `invalid` (also used for unknown/missing) and `error`
   - Token flow: read token from URL → call confirm endpoint → show result
   - Add `noindex` (shouldn't show up in search results)
 - [x] **Env vars**, locally (`.env.local`) and on the hosting dashboard, plus `.env.example`
