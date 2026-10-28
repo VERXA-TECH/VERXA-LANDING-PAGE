@@ -26,25 +26,25 @@ _Last updated: 2026-10-27_
 - `captchaToken`: the Turnstile token
 - `source`: where the signup came from (`landing-hero`; CTA value still to confirm)
 - `website`: honeypot. A hidden field real visitors never see, so it's always sent empty. Bots that fill every field get caught
-4. Email links to `https://www.verxa.io/waitlist/confirmation` on the landing page (backend asked for the app URL for this link)
+4. Email has a confirm link; backend confirms, then redirects to `https://www.verxa.io/waitlist/confirm?status=confirmed` on the landing page
 
 ## Waiting on backend
 
 | # | Question | Answer | Status |
 |---|----------|--------|--------|
-| 1 | Endpoint URL | Staging: `https://verxa-backend-api-staging-baa322a93f4c.herokuapp.com/api/waitlist`. No prod yet | 🟡 Need prod URL when it exists |
+| 1 | Endpoint URL | Staging: `https://verxa-backend-api-staging-baa322a93f4c.herokuapp.com/api/waitlist`. No prod yet. Backend: "maybe yea we should" use the staging URL on prod until prod exists. Needs `https://www.verxa.io` in staging CORS first (#11) | 🟡 Leaning staging for now |
 | 2 | Request body | `email`, `captchaToken`, `source`, `website` (see above) | ✅ Answered |
 | 2a | `source` value for the CTA form (`landing-cta`?) | | ⏳ Pending |
 | 2b | Response: status codes + body for success / already registered / captcha failed / honeypot hit | Errors are `{"status":"fail","message":"…"}`. Seen on staging: 400 captcha failed, 403 no/disallowed `Origin`. Success / already registered still unconfirmed (code assumes 2xx / 409) | 🟡 Partly answered |
 | 3 | Auth | None, relies on allowed origin + Turnstile | ✅ Decided |
 | 4 | Is backend verifying the Turnstile token? | Yes, sent as `captchaToken` | ✅ Answered |
-| 5 | Prod domain + `localhost` added to Turnstile allowed hostnames | | ⏳ Pending |
-| 6 | Confirmation page: link from the email with a token, or just a success page? | Linked from the email. Token or not still unclear | 🟡 Partly answered |
-| 7 | If token: query param name + confirm endpoint URL + responses (success / expired / invalid) | | ⏳ Pending |
+| 5 | Prod domain + `localhost` added to Turnstile allowed hostnames | `127.0.0.1`, `localhost`, `verxa.io`, `www.verxa.io` added (widget mode: Managed) | ✅ Answered |
+| 6 | Confirmation page: link from the email with a token, or just a success page? | Backend handles the token, then redirects to `/waitlist/confirm?status=confirmed` | ✅ Answered |
+| 7 | Other `status` values backend can redirect with (expired / invalid / already confirmed?) | | ⏳ Pending |
 | 8 | Does the landing page still save signups to Supabase, or does backend store them now? | Both: backend stores in its DB, landing page keeps its Supabase copy | ✅ Answered |
 | 9 | Signing up twice: does backend resend the email or ignore it? | | ⏳ Pending |
 | 10 | Switch the Turnstile widget to Invisible mode in the Cloudflare dashboard (so the checkbox never shows) | | ⏳ Pending |
-| 11 | Add `https://www.verxa.io` to backend CORS allowed origins (currently "Not allowed by CORS") | | ⏳ Pending |
+| 11 | Add `https://www.verxa.io` to backend CORS allowed origins (currently "Not allowed by CORS") | Added | ✅ Answered |
 
 > Origin note: confirmed. Backend returns 403 when there's no `Origin` header, so `/api/waitlist` now sends `Origin: NEXT_PUBLIC_SITE_URL`. Staging allows `http://localhost:3000`; prod domain needs adding (#11).
 
@@ -62,7 +62,7 @@ _Last updated: 2026-10-27_
   - Map backend responses to form messages (#2b)
   - Short timeout (~5s)
   - Decide what the visitor sees if the backend fails (depends on #8)
-- [ ] **Confirmation page** (success-page-only version built; token flow still pending) at `src/app/waitlist/confirmation/page.tsx` (depends on #6, #7)
+- [x] **Confirmation page** at `src/app/waitlist/confirm/page.tsx`: `status=confirmed` shows success, any other value shows "link didn't work" (other status values still to confirm, #7)
   - Token flow: read token from URL → call confirm endpoint → show result
   - Add `noindex` (shouldn't show up in search results)
 - [x] **Env vars**, locally (`.env.local`) and on the hosting dashboard, plus `.env.example`
