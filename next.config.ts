@@ -12,6 +12,13 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Pages opened from security emails carry a token in the URL. Keep it
+        // out of every Referer header, including those for the page's own
+        // assets.
+        source: '/security/:path*',
+        headers: [{ key: 'Referrer-Policy', value: 'no-referrer' }],
+      },
     ]
   },
 }
