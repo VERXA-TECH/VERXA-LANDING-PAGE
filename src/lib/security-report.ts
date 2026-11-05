@@ -30,12 +30,17 @@ export type ReportOutcome =
 const INVALID_FALLBACK =
   "This link is invalid or has expired. Please contact support."
 
-// Heroku's router gives up at 30 seconds, so waiting longer gains nothing.
-const REQUEST_TIMEOUT_MS = 30_000
+// The browser sends a CORS preflight (OPTIONS) before the POST, and each can
+// take up to Heroku's 30-second router limit while a sleeping dyno wakes. One
+// 30-second budget for both could give up on a report that then froze the
+// account, and tell the user it couldn't confirm.
+const REQUEST_TIMEOUT_MS = 65_000
 
 export async function reportUnauthorized(token: string): Promise<ReportOutcome> {
   const baseUrl = process.env.NEXT_PUBLIC_VERXA_API_BASE_URL
 
+  // `next build` fails without it (next.config.ts), so this only guards a
+  // build made some other way.
   if (!baseUrl) {
     console.error(
       "[security] NEXT_PUBLIC_VERXA_API_BASE_URL is not set; the report was not sent.",
@@ -43,7 +48,14 @@ export async function reportUnauthorized(token: string): Promise<ReportOutcome> 
     return { kind: "unconfirmed" }
   }
 
+  // Not `AbortSignal.timeout()`: Safari only has it from 16, and Next doesn't
+  // polyfill it. On iOS 15 it would throw before the request left, so the
+  // report would never be sent and the page would say it couldn't confirm.
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+
   let response: Response
+  let body: unknown
 
   try {
     response = await fetch(
@@ -55,16 +67,17 @@ export async function reportUnauthorized(token: string): Promise<ReportOutcome> 
         // The token is the credential; no cookies or referrer go with it.
         credentials: "omit",
         referrerPolicy: "no-referrer",
-        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+        signal: controller.signal,
       },
     )
+    body = await response.json().catch(() => null)
   } catch {
     // Offline, timed out, or refused by CORS. Whether the request arrived is
     // unknown, so this can't be called a failure.
     return { kind: "unconfirmed" }
+  } finally {
+    clearTimeout(timer)
   }
-
-  const body: unknown = await response.json().catch(() => null)
 
   if (response.ok) {
     // Only the documented `{ data: { secured: true } }` may tell someone their

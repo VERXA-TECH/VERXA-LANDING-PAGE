@@ -7,7 +7,12 @@ import {
   type ReportOutcome,
 } from "@/lib/security-report"
 
-type PanelState = { kind: "ready" } | { kind: "submitting" } | ReportOutcome
+type PanelState =
+  | { kind: "ready" }
+  | { kind: "submitting" }
+  /** No token in the URL, or one that can't be real. Nothing was sent. */
+  | { kind: "incomplete" }
+  | ReportOutcome
 
 type SecureAccountPanelProps = {
   /** `null` when the URL carried no token, or one that can't be real. */
@@ -28,7 +33,7 @@ const buttonClass =
  */
 export function SecureAccountPanel({ token }: SecureAccountPanelProps) {
   const [state, setState] = useState<PanelState>(
-    token ? { kind: "ready" } : { kind: "invalid", message: MISSING_TOKEN },
+    token ? { kind: "ready" } : { kind: "incomplete" },
   )
   // A double click lands both events before the first state update, so the
   // guard can't be the state itself. The token is single-use either way.
@@ -36,11 +41,21 @@ export function SecureAccountPanel({ token }: SecureAccountPanelProps) {
 
   // The token is a credential: take it out of the address bar, and with it
   // out of history and anything else that reads the URL. A reload then shows
-  // the missing-token copy, which sends the user back to the email.
+  // the incomplete-link copy, which sends the user back to the email.
+  //
+  // Deferred a task, and with `null` state, so it goes through Next's router.
+  // Next hooks `history.replaceState` in its root router's effect, and effects
+  // run child-first, so a call made here directly hit the browser's own
+  // method: it dropped Next's history state, and the router still held
+  // `?token=…`, which it could write back on its next update.
   useEffect(() => {
-    if (window.location.search) {
+    if (!window.location.search) return undefined
+
+    const timer = window.setTimeout(() => {
       window.history.replaceState(null, "", window.location.pathname)
-    }
+    }, 0)
+
+    return () => window.clearTimeout(timer)
   }, [])
 
   const secure = async () => {
@@ -56,7 +71,7 @@ export function SecureAccountPanel({ token }: SecureAccountPanelProps) {
     return (
       <Section
         title="Secure your account"
-        description="If you didn't change your Verxa PIN or password, secure your account now. We'll freeze transfers and sign you out on every device, and you'll need to contact support to get back in."
+        description="If you didn't change your Verxa transaction PIN, secure your account now. We'll freeze transfers and sign you out on every device, and you'll need to contact support to get back in."
       >
         <button
           type="button"
@@ -84,9 +99,25 @@ export function SecureAccountPanel({ token }: SecureAccountPanelProps) {
     )
   }
 
-  if (state.kind === "invalid") {
+  if (state.kind === "incomplete") {
     return (
-      <Section title="This link didn't work" description={state.message}>
+      <Section
+        title="This link didn't work"
+        description={`This link is incomplete. Open the "This wasn't me" link in your email again, or contact us at ${SUPPORT_EMAIL} if you didn't make this change.`}
+      >
+        <SupportLink />
+      </Section>
+    )
+  }
+
+  if (state.kind === "invalid") {
+    // The backend's message says "contact support" without an address, and a
+    // mailto button does nothing for someone without a mail app.
+    return (
+      <Section
+        title="This link didn't work"
+        description={`${state.message} You can reach us at ${SUPPORT_EMAIL}.`}
+      >
         <SupportLink />
       </Section>
     )
@@ -112,8 +143,6 @@ export function SecureAccountPanel({ token }: SecureAccountPanelProps) {
     </Section>
   )
 }
-
-const MISSING_TOKEN = `This link is incomplete. Open the "This wasn't me" link in your email again, or contact us at ${SUPPORT_EMAIL} if you didn't make this change.`
 
 function Section({
   title,
